@@ -1,0 +1,41 @@
+#!/usr/bin/env ruby
+
+require 'highline'
+
+H = HighLine.new
+
+name    = H.ask('    Name: '){ |q| q.validate = /\w+/ }
+passwd  = H.ask('Password: '){ |q| q.echo     = false }
+
+def sh command, secret=nil
+  puts(secret ? command + secret.gsub(/./, '*') : command)
+  exit(1) unless system(command + secret.to_s)
+end
+
+# simplest useradd
+sh("sudo dscl . create /Users/#{name}")
+
+if passwd.strip.empty?
+  puts('No password specified, so no home, shell, uid, group, etc. setup.')
+  exit
+end
+
+# setup shell
+sh("sudo dscl . create /Users/#{name} UserShell /bin/sh")
+
+# setup password
+sh("sudo dscl . passwd /Users/#{name} ", passwd)
+
+# setup UID (how come this is not strictly required?)
+uid = `dscl . list /Users UniqueID | awk '{print $2}' | sort -ug | tail -1`.
+      chop.to_i + 1
+
+sh("sudo dscl . create /Users/#{name} UniqueID #{uid}")
+
+# setup group
+sh("sudo dscl . create /Users/#{name} PrimaryGroupID 0")
+
+# setup home
+sh("sudo dscl . create /Users/#{name} dsAttrTypeNative:home /Users/#{name}")
+sh("sudo mkdir /Users/#{name}")
+sh("sudo chown sftp:staff /Users/#{name}")

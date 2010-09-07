@@ -1,0 +1,11 @@
+#!/usr/bin/env ruby
+
+ARGV.replace ['.'] if ARGV.empty?
+paths = ARGV.map{ |path|
+  if path == '.'
+    '.*'
+  else
+    path.sub(%r{/*?$}, '/.*')
+  end
+}
+exec "bash -ic 'll -d #{paths.join(' ')}'"

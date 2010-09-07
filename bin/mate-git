@@ -1,0 +1,9 @@
+#!/usr/bin/env ruby
+
+ARGV.replace ['.'] if ARGV.empty?
+Dir.chdir(ARGV.first)
+
+files = `git ls-files`.gsub('"', '').gsub(%r{/.+}, '').
+        split("\n").uniq.map{ |file| "'#{file}'" }
+
+`mate #{files.join(' ')}`

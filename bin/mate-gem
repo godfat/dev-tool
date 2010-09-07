@@ -1,0 +1,13 @@
+#!/usr/bin/env ruby
+
+def sh command
+  puts command
+  `#{command}`
+end
+
+if path = Gem.find_files(ARGV.first).first
+  sh("mate #{path[Regexp.new("#{Gem.path.first}(/[^/]+){2}")]}")
+else
+  puts("404 Not Found")
+  exit(1)
+end

@@ -1,0 +1,18 @@
+#!/usr/bin/env ruby
+
+require_relative 'prompt'
+
+size  = 4
+width = `tput cols`.to_i / size
+
+(30..37).each.with_index{ |rgb, index|
+  print Prompt.color(rgb){ sprintf "%#{size}s", rgb }
+  print "\n" if (index + 1) % width == 0
+}
+puts
+
+(0..255).each.with_index{ |rgb, index|
+  print Prompt.color256(rgb){ sprintf "%#{size}s", rgb }
+  print "\n" if (index + 1) % width == 0
+}
+puts

@@ -1,0 +1,66 @@
+#!/usr/bin/env ruby
+
+def sh command
+  puts(command)
+  exit(1) unless system(command)
+end
+
+branch = `git branch | grep '*' | sed 's/* //'`.strip
+remote = if ARGV.empty?
+           `git remote`.split(/\s+/)
+         else
+           ARGV
+         # if size == 1 then first, otherwise nil
+         end.inject{ |r, i| i ? nil : r }
+
+if remote.nil?
+  puts("Which remote do you want to track?")
+  puts("Usage: git-track [remote]")
+  exit(1)
+end
+
+sh("git config branch.#{branch}.remote #{remote}")
+sh("git config branch.#{branch}.merge refs/heads/#{branch}")
+
+__END__
+I am very tired of setting up tracking branch,
+which needs two commands like this:
+
+$ git config branch.master.remote github
+$ git config branch.master.merge refs/heads/master
+
+This is very very annoying and hard to remember...
+So I just wrote a simple script to do this:
+http://github.com/godfat/dot-rc/blob/master/bin/git-track
+
+Put this script under any path in $PATH,
+in my case, it's ~/bin
+then you can use:
+
+$ git track
+
+to do above. An example:
+
+~/p/g/dot-rc master> git push
+fatal: No destination configured to push to.
+
+# because there's no tracking branch
+
+~/p/g/dot-rc master> git track
+git config branch.master.remote github
+git config branch.master.merge refs/heads/master
+
+# default behaviour is tracking the only remote,
+# if there's more remotes, e.g. github + heroku,
+# this command would give an error like this:
+
+~/p/g/dot-rc master> git track abc def
+Which remote do you want to track?
+Usage: git-track [remote]
+
+# when there's a tracking branch, then push without arguments works:
+
+~/p/g/dot-rc master> git push
+Total 0 (delta 0), reused 0 (delta 0)
+To git@github.com:godfat/dot-rc.git
+ * [new branch]      master -> master
