@@ -1,4 +1,4 @@
 #!/usr/bin/env ruby
 
 require_relative 'prompt'
-print Prompt.prompt
+print Prompt.prompt_full

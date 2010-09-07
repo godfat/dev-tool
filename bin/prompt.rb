@@ -2,12 +2,12 @@
 
 module Prompt
   module_function
-  def prompt
-    "#{gray256{time}} #{reset{where}}#{green{cwd}}#{cyan{git}}$"
+  def prompt_full
+    "#{gray256{time}} #{color256(22){where}}#{green{cwd}}#{cyan{git}}$"
   end
 
-  def prompt_lite
-    "#{red{time}} #{green{cwd}}#{cyan{git}}$"
+  def prompt
+    "#{white{time}} #{green{cwd}}#{cyan{git}}$"
   end
 
   def time
@@ -81,4 +81,4 @@ module Prompt
   end
 end
 
-print Prompt.prompt_lite if $PROGRAM_NAME == __FILE__
+print Prompt.prompt if $PROGRAM_NAME == __FILE__

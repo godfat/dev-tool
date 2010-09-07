@@ -35,4 +35,4 @@ if [ -f `brew --prefix`/etc/bash_completion ]; then
 fi
 
 export PS1=' '
-export PROMPT_COMMAND=prompt-full
+export PROMPT_COMMAND=prompt.rb
