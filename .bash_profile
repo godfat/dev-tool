@@ -35,4 +35,5 @@ if [ -f `brew --prefix`/etc/bash_completion ]; then
 fi
 
 export PS1=' '
-export PROMPT_COMMAND=prompt.rb
+export PROMPT_COMMAND=prompt.rb # change this to prompt-full if you have
+                                # xterm-color256
