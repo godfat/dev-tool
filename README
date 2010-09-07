@@ -1,2 +1,4 @@
 clone this into ~/ without configuration?
-how to install? just put this in ~ or run: install.sh
+how to install? just put this in ~ or run: install.sh or run this:
+
+$ sh -c "`curl http://github.com/godfat/dev-tool/raw/master/install.sh`"
