@@ -1,0 +1,24 @@
+[color]
+  branch = auto
+  diff = auto
+  interactive = auto
+  status = auto
+  ui = auto
+[diff]
+  renames = copy
+[push]
+  default = tracking
+[merge]
+  log = true
+
+# https://git.wiki.kernel.org/index.php/Aliases
+[alias]
+  st = status
+  co = checkout
+
+  rmall = !git status | grep 'deleted:' | sed -E 's/.*\\deleted: +//' | xargs git rm
+
+  logo = log ORIG_HEAD.. --stat
+  loga = !git log --color --author=`git config user.email` | less --raw
+
+  coal = !git branch -r | egrep '^[^>]+$' | sed -E 's/(.+)\\/(.+)/git branch \\2 --track\\1\\/\\2/' | ruby -e 'puts $stdin.read.split(\"\n\").map{ |s| send(:`, s) }.reject(&:empty?)' 2> /dev/null
