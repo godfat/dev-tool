@@ -6,7 +6,11 @@ def sh command
 end
 
 if path = Gem.find_files(ARGV.first).first
-  sh("mate #{path[Regexp.new("#{Gem.path.first}(/[^/]+){2}")]}")
+  if path_gem = path[Regexp.new("#{Gem.path.first}(/[^/]+){2}")]
+    sh("mate #{path_gem}")
+  else
+    sh("mate #{path}")
+  end
 else
   puts("404 Not Found")
   exit(1)
