@@ -15,10 +15,15 @@
 [alias]
   st = status
   co = checkout
-
-  rmall = !git status | grep 'deleted:' | sed -E 's/.*\\deleted: +//' | xargs git rm
+  ci = commit
 
   logo = log ORIG_HEAD.. --stat
   loga = !git log --color --author=`git config user.email` | less --raw
+  logg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+
+  rollback = reset --hard
+  contri = shortlog -sn
+  rmall = !git status | grep 'deleted:' | sed -E 's/.*\\deleted: +//' | xargs git rm
+  aliases = !git config --get-regexp 'alias.*' | colrm 1 6 | sed 's/[ ]/ = /'
 
   coal = !git branch -r | egrep '^[^>]+$' | sed -E 's/(.+)\\/(.+)/git branch \\2 --track\\1\\/\\2/' | ruby -e 'puts $stdin.read.split(\"\n\").map{ |s| send(:`, s) }.reject(&:empty?)' 2> /dev/null
