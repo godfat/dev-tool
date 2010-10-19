@@ -68,7 +68,7 @@ module Prompt
     case `git status --porcelain 2> /dev/null`
       when ''
         ''   # clean
-      when /\A(^[AMDR]  [^\n]+\n)+\Z/
+      when /\A(^[AMDRT]  [^\n]+\n)+\Z/
         '#' # all staged
       else
         '*' # dirty
