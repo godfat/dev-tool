@@ -5,7 +5,10 @@ def sh command
   `#{command}`
 end
 
-if path = Gem.find_files(ARGV.first).first
+name, version = ARGV
+gem name, version if version
+
+if path = Gem.find_files(name).first
   if path_gem = path[Regexp.new("#{Gem.path.first}(/[^/]+){2}")]
     sh("mate #{path_gem}")
   else
