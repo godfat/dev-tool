@@ -64,11 +64,17 @@ module Prompt
     (s = dirty + branch).empty? ? '' : " #{s}"
   end
 
+  # A: added
+  # M: modified
+  # D: deleted
+  # R: renamed
+  # T: typechanged
+  # C: copied
   def dirty
     case `git status --porcelain 2> /dev/null`
       when ''
         ''   # clean
-      when /\A(^[AMDRT]  [^\n]+\n)+\Z/
+      when /\A(^[AMDRTC]  [^\n]+\n)+\Z/
         '#' # all staged
       else
         '*' # dirty
