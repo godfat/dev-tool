@@ -1,0 +1,15 @@
+#!/usr/bin/env ruby
+
+def sh command
+  puts("\x1b[32m~\x1b[m> \x1b[36m#{command}\x1b[m")
+  exit(1) unless system(command)
+end
+
+if ARGV.first && ARGV.first == 'update'[0, ARGV.first.size]
+  Dir.chdir(File.expand_path('~'))
+  sh 'git stash'
+  sh 'git pull'
+  sh 'git stash pop'
+else
+  puts "Usage: dev-tool update"
+end
