@@ -1,8 +1,8 @@
 #!/usr/bin/env ruby
 
 def sh command
-  puts command
-  `#{command}`
+  puts(command)
+  exit(1) unless system(command)
 end
 
 name, version = ARGV
