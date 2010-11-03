@@ -1,6 +1,10 @@
 #!/usr/bin/env ruby
 
-require_relative 'prompt'
+if respond_to?(:require_relative, true)
+  require_relative 'prompt'
+else
+  require File.dirname(__FILE__) + '/prompt'
+end
 
 size  = 4
 width = `tput cols`.to_i / size
