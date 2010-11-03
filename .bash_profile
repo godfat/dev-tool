@@ -34,6 +34,9 @@ if [ -f `brew --prefix`/etc/bash_completion ]; then
   . `brew --prefix`/etc/bash_completion
 fi
 
-export PS1=' '
-export PROMPT_COMMAND=prompt.rb # change this to prompt-full if you have
-                                # xterm-color256
+export PS1='`echo -e "\x1b["`37m`date "+%H:%M"``echo -e "\x1b[m"` `prompt-where``echo -e "\x1b["`32m`prompt-cwd``echo -e "\x1b["`36m`prompt-git``echo -e "\x1b[m"`$ '
+
+# until bash fix this terminal problem, we can only rely on PS1...
+# export PS1=' '
+# export PROMPT_COMMAND=prompt.rb # change this to prompt-full if you have
+                                  # xterm-color256
