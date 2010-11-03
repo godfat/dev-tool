@@ -19,6 +19,8 @@ module Prompt
       require 'socket'
       require 'etc'
       "#{Etc.getlogin}@#{Socket.gethostname} "
+    else
+      ''
     end
   end
 
