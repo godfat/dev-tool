@@ -2,6 +2,8 @@
 !/.config
 !/bin
 
+bin/ignore-*
+
 .config/fish/fishd.*
 .config/fish/fish_history
 .config/fish/fish_history.tmp
