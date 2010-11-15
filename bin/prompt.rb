@@ -25,7 +25,11 @@ module Prompt
   end
 
   def cwd
-    Dir.pwd.sub(/^#{ENV['HOME']}/, '~').gsub(/(\w).*?\//, '\1/')
+    if ENV['PROMPT_PATH_ABBR']
+      Dir.pwd.sub(/^#{ENV['HOME']}/, '~').gsub(/(\w).*?\//, '\1/')
+    else
+      Dir.pwd
+    end
   end
 
   def git
