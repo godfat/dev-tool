@@ -2,14 +2,49 @@
 
 def sh command
   puts("\x1b[32m~\x1b[m> \x1b[36m#{command}\x1b[m")
-  exit(1) unless system(command)
+  exit(1) unless system(command) unless ARGV.find{ |arg|
+                                          ['-d', '--dry-run'].member?(arg) }
 end
 
-if ARGV.first && ARGV.first == 'update'[0, ARGV.first.size]
+def help
+  puts "Usage: dev-tool [update|install]"
+end
+
+if cmd = ARGV.find{ |arg| !arg.start_with?('-') }
   Dir.chdir(File.expand_path('~'))
-  sh 'git stash'
-  sh 'git pull'
-  sh 'git stash pop'
+  case cmd
+    when 'update'[0, cmd.size]
+      sh 'git stash'
+      sh 'git pull'
+      sh 'git stash pop'
+
+    when 'install'[0, cmd.size]
+      sh 'git clone --no-checkout git://github.com/godfat/dev-tool.git'
+      sh 'mv dev-tool/.git .'
+      sh 'rmdir dev-tool'
+      sh 'git reset --hard'
+      sh 'git config prompt.hide true'
+
+      source = 'source .config/dev-tool/bash_profile'
+
+      # update .bash_profile, don't put duplicated source
+      profile = if File.exist?('.bash_profile')
+                  (File.read('.bash_profile').split("\n").reject{ |line|
+                    line == source
+                   } << source).join("\n")
+                else
+                  source
+                end
+
+      File.open('.bash_profile', 'w'){ |bash_profile|
+        bash_profile.puts(profile)
+      }
+
+      sh source
+
+    else
+      help
+  end
 else
-  puts "Usage: dev-tool update"
+  help
 end
