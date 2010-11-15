@@ -1,7 +1,9 @@
-Clone this into ~/ without configuration?
+Clone this into ~/ and source .config/dev-tool/bash_profile, or:
+
 How to install?
 
-  $ sh -c "`curl http://github.com/godfat/dev-tool/raw/master/install.sh`"
+  $ curl https://github.com/godfat/dev-tool/raw/master/bin/dev-tool > /tmp/dev-tool
+  $ ruby /tmp/dev-tool install
 
 How to update?
 
