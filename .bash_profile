@@ -40,3 +40,16 @@ export PS1='`echo -e "\x1b["`37m`date "+%H:%M"``echo -e "\x1b[m"` `prompt-where`
 # export PS1=' '
 # export PROMPT_COMMAND=prompt.rb # change this to prompt-full if you have
                                   # xterm-color256
+
+# probably should be inside .bashrc?
+# linux bash specific
+if   test $(uname) = 'Linux'; then
+  alias ls='ls --color'
+  alias ll='ls -l'
+  alias la='ll -a'
+# mac bash specific
+elif test $(uname) = 'Darwin'; then
+  alias ls='ls -Gw'
+  alias ll='ls -lhw'
+  alias la='ll -a'
+fi
