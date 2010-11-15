@@ -20,8 +20,6 @@ if test $(which fish 2> /dev/null); then
   fish
 fi
 
-source ~/.bashrc
-
 if test -f `brew --prefix`/Library/Contributions/brew_bash_completion.sh; then
   source `brew --prefix`/Library/Contributions/brew_bash_completion.sh
 fi
