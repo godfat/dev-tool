@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 
 def sh command
-  puts("\x1b[32m~\x1b[m> \x1b[36m#{command}\x1b[m")
+  puts("\x1b[34m~\x1b[m> \x1b[32m#{command}\x1b[m")
   exit(1) unless system(command) unless ARGV.find{ |arg|
                                           ['-d', '--dry-run'].member?(arg) }
 end
