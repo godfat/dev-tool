@@ -1,0 +1,20 @@
+#!/usr/bin/env ruby
+
+def sh command
+  puts(command)
+  exit(1) unless system(command)
+end
+
+def stash
+  path = "#{File.expand_path('~')}/.config/ruby/Gemfile"
+
+  gemfile = File.read(path).gsub(/(^.)/){ |m|
+    m[0] == '#' ? m[1..-1] : "##{m}"
+  }
+
+  File.open(path, 'w'){ |f| f << gemfile }
+end
+
+stash
+sh('rm Gemfile.lock; bundle check')
+stash
