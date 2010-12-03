@@ -30,6 +30,7 @@ set ruler                      " show line, col info
 set hidden                     " what's this?
 set ignorecase                 " ignore case when searching
 set smartcase                  " ignore case when searching lower cases
+set spell                      " spell checker for non-native English speaker
 
 set backupdir=~/tmp,/tmp
 set directory=~/tmp,/tmp
