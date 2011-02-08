@@ -38,14 +38,14 @@ set directory=~/tmp,/tmp
 "set nowritebackup
 "set noswapfile
 
-if has('gui_running')
-  set guifont=DejaVu\ Sans\ Mono:h18
-  set linespace=3
-
-  set number        " display line number
-  set showtabline=2 " always display tab bar
-  set laststatus=2  " always display status bar
-
-  set statusline=%<%f\ %h%m%r%=%k%y[%{(&fenc==\"\")?&enc:&fenc}%{(&bomb?\",BOM\":\"\")}]\ %-14.(%l,%c%V,%B%)\ %P
-  colorscheme twilight
-endif
+"if has('gui_running')
+"  set guifont=DejaVu\ Sans\ Mono:h18
+"  set linespace=3
+"
+"  set number        " display line number
+"  set showtabline=2 " always display tab bar
+"  set laststatus=2  " always display status bar
+"
+"  set statusline=%<%f\ %h%m%r%=%k%y[%{(&fenc==\"\")?&enc:&fenc}%{(&bomb?\",BOM\":\"\")}]\ %-14.(%l,%c%V,%B%)\ %P
+"  colorscheme twilight
+"endif
