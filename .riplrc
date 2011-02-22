@@ -1,4 +1,5 @@
 
+require 'ripl'
 require 'ripl/multi_line'
 
 module Ripl::RiplRc
