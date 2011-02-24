@@ -1,7 +1,6 @@
 
 require 'ripl'
 require 'ripl/rc'
-require 'ripl/multi_line'
 
 Ripl.config[:irbrc]   = nil
 Ripl.config[:history] = '~/.config/irb/irb_history'
