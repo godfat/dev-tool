@@ -21,6 +21,7 @@
   loga = !git log --color --author=`git config user.email` | less --raw
   logg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
 
+  whatnext = !git describe | sed -E 's/\\-.+\\-.+$//' | xargs git diff
   rollback = reset --hard
   contri = shortlog -sn
   rmall = !git status | grep 'deleted:' | sed -E 's/.*\\deleted: +//' | xargs git rm
