@@ -1,6 +1,3 @@
 
-require 'ripl'
 require 'ripl/rc'
-
-Ripl.config[:irbrc]   = nil
 Ripl.config[:history] = '~/.config/irb/irb_history'
