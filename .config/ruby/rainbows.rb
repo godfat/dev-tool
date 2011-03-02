@@ -1,5 +1,5 @@
 
-Thread.new{ load '~/bin/gemfile' }
+# Thread.new{ load '~/bin/gemfile' }
 
 worker_processes 2
 
