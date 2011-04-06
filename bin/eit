@@ -1,0 +1,28 @@
+#!/usr/bin/env ruby
+
+opts = lambda{ |opt| opt.start_with?('-') }
+args = ARGV.select(&opts)
+pths = ARGV.reject(&opts)
+argv = "#{args.join(' ')} #{pths.map{|p|"'#{p}'"}.join(' ')}"
+nons = pths.select{ |p| !File.exist?(p) }
+outs = `subl --new-window #{argv}` if nons.empty? && argv.strip != ''
+puts outs if outs && outs.strip != ''
+puts "#{nons.map{|p|"'#{p}'"}.join(', ')} were not existed." if nons.any?
+
+exit unless $DEBUG
+
+$DEBUG = false
+require 'highline'
+$DEBUG = true
+H = HighLine.new
+
+'eit
+ eit --help
+ eit asd
+ eit ~/.bash_profile
+ eit ~/.bash_profile asd'.split("\n").map(&:strip).each do |cmd|
+ puts `#{cmd}`
+ puts "Command: #{cmd}"
+ exit if H.choose('y', 'n') == 'n'
+ puts
+end
