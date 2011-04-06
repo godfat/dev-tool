@@ -1,2 +1,0 @@
-#!/usr/bin/env ruby
-`open -a TextMate '#{ARGV.join "' '"}'`
