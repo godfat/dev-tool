@@ -20,16 +20,20 @@ if test $(which fish 2> /dev/null); then
   fish
 fi
 
-if test -f `brew --prefix`/Library/Contributions/brew_bash_completion.sh; then
-  source `brew --prefix`/Library/Contributions/brew_bash_completion.sh
+# homebrew bash completion
+if test $(which brew 2> /dev/null); then
+  if test -f `brew --prefix`/Library/Contributions/brew_bash_completion.sh; then
+    source `brew --prefix`/Library/Contributions/brew_bash_completion.sh
+  fi
+
+  if test -f `brew --prefix`/etc/bash_completion; then
+    . `brew --prefix`/etc/bash_completion
+  fi
 fi
 
+# rvm scripts
 if test -e ~/.rvm/scripts/rvm; then
   source ~/.rvm/scripts/rvm
-fi
-
-if [ -f `brew --prefix`/etc/bash_completion ]; then
-  . `brew --prefix`/etc/bash_completion
 fi
 
 export PS1='\e[37m`date "+%H:%M"`\e[m `prompt-where`\e[32m`prompt-cwd`\e[m\e[36m`prompt-git`\e[m$ '
