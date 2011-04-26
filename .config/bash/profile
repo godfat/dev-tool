@@ -1,12 +1,13 @@
 
 # common setting
-export PATH=\
-~/bin:\
-~/.gem/ruby/1.9.1/bin:\
-~/.gem/jruby/1.8/bin:\
-/usr/local/bin:\
-/usr/local/sbin:\
-$PATH
+export PATH=/usr/local/bin:/usr/local/sbin:$PATH
+
+for path in ~/.gem/ruby/1.9.1/bin ~/.gem/jruby/1.8/bin ~/bin
+do
+  if test -d $path; then
+    export PATH=$path:$PATH
+  fi
+done
 
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
