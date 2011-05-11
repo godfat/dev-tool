@@ -1,11 +1,14 @@
 #!/usr/bin/env ruby
 
+# prog = 'subl --new-window'
+prog = 'open -a /Applications/TextMate.app'
+
 opts = lambda{ |opt| opt.start_with?('-') }
 args = ARGV.select(&opts)
 pths = ARGV.reject(&opts)
 argv = "#{args.join(' ')} #{pths.map{|p|"'#{p}'"}.join(' ')}"
 nons = pths.select{ |p| !File.exist?(p) }
-outs = `subl --new-window #{argv}` if nons.empty? && argv.strip != ''
+outs = `#{prog} #{argv}` if nons.empty? && argv.strip != ''
 puts outs if outs && outs.strip != ''
 puts "#{nons.map{|p|"'#{p}'"}.join(', ')} were not existed." if nons.any?
 
