@@ -8,7 +8,7 @@ end
 name, version = ARGV
 gem name, version if version
 
-if path = Gem.find_files(name).first
+if path = Gem.find_files("#{name}.rb").first
   if path_gem = path[Regexp.new("#{Gem.path.first}(/[^/]+){2}")]
     sh("eit #{path_gem}")
   else
