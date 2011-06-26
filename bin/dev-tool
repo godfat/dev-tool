@@ -10,14 +10,15 @@ def help
   puts "Usage: dev-tool [update|install]"
 end
 
-Dir.chdir(File.expand_path('~'))
 case cmd = ARGV.find{ |arg| !arg.start_with?('-') }
   when 'update'[0, cmd.size]
+    Dir.chdir(File.expand_path(File.dirname(__FILE__) + '/..'))
     sh 'git stash'
     sh 'git pull'
     sh 'git stash pop'
 
   when 'install'[0, cmd.size]
+    Dir.chdir(File.expand_path('~'))
     sh 'git clone --no-checkout git://github.com/godfat/dev-tool.git'
     sh 'mv dev-tool/.git .'
     sh 'rmdir dev-tool'
