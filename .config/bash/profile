@@ -18,7 +18,9 @@ export TERM=xterm-color
 
 # start fishing...
 if test $(which fish 2> /dev/null); then
+  export PROMPT_SHELL=fish
   fish
+  unset PROMPT_SHELL
 fi
 
 # homebrew bash completion

@@ -3,7 +3,7 @@
 module Prompt
   module_function
   def which_shell
-    if ENV['PATH'].split(':').find{ |path| path =~ %r{fish(/[^/]+)/bin$} }
+    if ENV['PROMPT_SHELL']
       'fish'
     else
       ENV['SHELL'][/\w+$/]
