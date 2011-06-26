@@ -10,41 +10,37 @@ def help
   puts "Usage: dev-tool [update|install]"
 end
 
-if cmd = ARGV.find{ |arg| !arg.start_with?('-') }
-  Dir.chdir(File.expand_path('~'))
-  case cmd
-    when 'update'[0, cmd.size]
-      sh 'git stash'
-      sh 'git pull'
-      sh 'git stash pop'
+Dir.chdir(File.expand_path('~'))
+case cmd = ARGV.find{ |arg| !arg.start_with?('-') }
+  when 'update'[0, cmd.size]
+    sh 'git stash'
+    sh 'git pull'
+    sh 'git stash pop'
 
-    when 'install'[0, cmd.size]
-      sh 'git clone --no-checkout git://github.com/godfat/dev-tool.git'
-      sh 'mv dev-tool/.git .'
-      sh 'rmdir dev-tool'
-      sh 'git reset --hard'
-      sh 'git config prompt.hide true'
+  when 'install'[0, cmd.size]
+    sh 'git clone --no-checkout git://github.com/godfat/dev-tool.git'
+    sh 'mv dev-tool/.git .'
+    sh 'rmdir dev-tool'
+    sh 'git reset --hard'
+    sh 'git config prompt.hide true'
 
-      source = 'source .config/dev-tool/bash_profile'
+    source = 'source .config/dev-tool/bash_profile'
 
-      # update .bash_profile, don't put duplicated source
-      profile = if File.exist?('.bash_profile')
-                  (File.read('.bash_profile').split("\n").reject{ |line|
-                    line == source
-                   } << source).join("\n")
-                else
-                  source
-                end
+    # update .bash_profile, don't put duplicated source
+    profile = if File.exist?('.bash_profile')
+                (File.read('.bash_profile').split("\n").reject{ |line|
+                  line == source
+                 } << source).join("\n")
+              else
+                source
+              end
 
-      File.open('.bash_profile', 'w'){ |bash_profile|
-        bash_profile.puts(profile)
-      }
+    File.open('.bash_profile', 'w'){ |bash_profile|
+      bash_profile.puts(profile)
+    }
 
-      sh source
+    sh source
 
-    else
-      help
-  end
-else
-  help
+  else
+    help
 end
