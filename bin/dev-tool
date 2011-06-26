@@ -1,7 +1,11 @@
 #!/usr/bin/env ruby
 
-def sh command
+def say command
   puts("\x1b[34m~\x1b[m> \x1b[32m#{command}\x1b[m")
+end
+
+def sh command
+  say(command)
   exit(1) unless system(command) unless ARGV.find{ |arg|
                                           ['-d', '--dry-run'].member?(arg) }
 end
@@ -10,15 +14,33 @@ def help
   puts "Usage: dev-tool [update|install]"
 end
 
+def check_installation!
+  if File.exist?('dev-tool')
+    say "#{Dir.pwd}/dev-tool existed."
+    exit(1)
+  elsif File.exist?('.git')
+    say "#{Dir.pwd}/.git existed."
+    exit(2)
+  end
+end
+
 case cmd = ARGV.find{ |arg| !arg.start_with?('-') }
-  when 'update'[0, cmd.size]
-    Dir.chdir(File.expand_path(File.dirname(__FILE__) + '/..'))
+  when 'update'[0, (cmd||0).size]
+    dir = File.expand_path(File.dirname(__FILE__) + '/..')
+    Dir.chdir(dir)
+    say "cd #{dir}"
+
     sh 'git stash'
     sh 'git pull'
     sh 'git stash pop'
 
-  when 'install'[0, cmd.size]
-    Dir.chdir(File.expand_path('~'))
+  when 'install'[0, (cmd||0).size]
+    dir = File.expand_path('~')
+    Dir.chdir(dir)
+    say "cd #{dir}"
+
+    check_installation!
+
     sh 'git clone --no-checkout git://github.com/godfat/dev-tool.git'
     sh 'mv dev-tool/.git .'
     sh 'rmdir dev-tool'
