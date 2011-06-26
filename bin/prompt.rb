@@ -18,13 +18,12 @@ module Prompt
     end
   end
 
-  def prompt_full
-    "#{gray256{time}} #{color256(22){where}}" \
-    "#{green{cwd}}#{cyan{git}}#{prompt_char} "
-  end
-
   def prompt
-    "#{white{time}} #{green{cwd}}#{cyan{git}}#{prompt_char} "
+    case which_shell
+      when 'fish'; "#{white{time}} #{green{cwd}}#{cyan{git}}#{prompt_char} "
+      else       ; "#{gray256{time}} #{color256(22){where}}" \
+                   "#{green{cwd}}#{cyan{git}}#{prompt_char} "
+    end
   end
 
   def time
