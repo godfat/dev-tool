@@ -2,12 +2,29 @@
 
 module Prompt
   module_function
+  def which_shell
+    if ENV['PATH'].split(':').find{ |path| path =~ %r{fish(/[^/]+)/bin$} }
+      'fish'
+    else
+      ENV['SHELL'][/\w+$/]
+    end
+  end
+
+  def prompt_char
+    case which_shell
+      when 'fish'; '>'
+      when 'bash'; '$'
+      else       ; '%'
+    end
+  end
+
   def prompt_full
-    "#{gray256{time}} #{color256(22){where}}#{green{cwd}}#{cyan{git}}$"
+    "#{gray256{time}} #{color256(22){where}}" \
+    "#{green{cwd}}#{cyan{git}}#{prompt_char} "
   end
 
   def prompt
-    "#{white{time}} #{green{cwd}}#{cyan{git}}$"
+    "#{white{time}} #{green{cwd}}#{cyan{git}}#{prompt_char} "
   end
 
   def time
@@ -48,19 +65,32 @@ module Prompt
   def   white &block; color(37, &block); end
   def   reset &block; color('', &block); end
 
-  def color rgb
-    "\x1b[#{rgb}m" + (block_given? ? "#{yield}#{reset}" : '')
+  def color rgb, &block
+    color_code("\x1b[#{rgb}m", &block)
   end
 
   def green256 &block; color256(  2, &block); end
   def  cyan256 &block; color256(  6, &block); end
   def  gray256 &block; color256(102, &block); end
 
-  def color256 rgb
-    "\x1b[38;5;#{rgb}m" + (block_given? ? "#{yield}#{reset}" : '')
+  def color256 rgb, &block
+    color_code("\x1b[38;5;#{rgb}m", &block)
   end
 
   # private
+
+  def color_code code
+    c = case which_shell
+          when 'bash'; "\\[#{code}\\]"
+          else       ;       code
+        end
+
+    if block_given?
+      "#{c}#{yield}#{reset}"
+    else
+      c
+    end
+  end
 
   def hide?
     `git config --get prompt.hide`.strip == 'true'

@@ -37,14 +37,8 @@ if test -e ~/.rvm/scripts/rvm; then
   source ~/.rvm/scripts/rvm
 fi
 
-export PS1='\e[37m`date "+%H:%M"`\e[m `prompt-where`\e[32m`prompt-cwd`\e[m\e[36m`prompt-git`\e[m$ '
-
-# export PS1='`echo -e "\x1b["`37m`date "+%H:%M"``echo -e "\x1b[m"` `prompt-where``echo -e "\x1b["`32m`prompt-cwd``echo -e "\x1b["`36m`prompt-git``echo -e "\x1b[m"`$ '
-
-# until bash fix this terminal problem, we can only rely on PS1...
-# export PS1=' '
-# export PROMPT_COMMAND=prompt.rb # change this to prompt-full if you have
-                                  # xterm-color256
+bash_prompt(){ PS1=`prompt.rb`; }
+export PROMPT_COMMAND=bash_prompt
 
 # probably should be inside .bashrc?
 # linux bash specific
