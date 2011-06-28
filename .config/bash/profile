@@ -4,10 +4,10 @@ export PATH=/usr/local/bin:/usr/local/sbin:$PATH
 
 rubies=`ls -d ~/.gem/*/* | egrep '([0-9]\.)+[0-9]$'`
 
-for path in $rubies ~/bin
+for path in $rubies ~
 do
   if test -d $path; then
-    export PATH=$path:$PATH
+    export PATH=$path/bin:$PATH
   fi
 done
 
