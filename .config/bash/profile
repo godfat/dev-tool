@@ -2,7 +2,9 @@
 # common setting
 export PATH=/usr/local/bin:/usr/local/sbin:$PATH
 
-for path in ~/.gem/jruby/1.8/bin ~/.gem/ruby/1.9.1/bin ~/bin
+rubies=`ls -d ~/.gem/*/* | egrep '([0-9]\.)+[0-9]$'`
+
+for path in $rubies ~/bin
 do
   if test -d $path; then
     export PATH=$path:$PATH
