@@ -1,7 +1,10 @@
 #!/usr/bin/env ruby
 
-# prog = 'subl --new-window'
-prog = 'open -a /Applications/TextMate.app'
+prog = case ENV['EIT_EDITOR'] || 'textmate'
+         when 'textmate'; 'open -a /Applications/TextMate.app'
+         when 'sublime2'; 'subl --new-window'
+         else raise "Unknown EIT_EDITOR: #{ENV['EIT_EDITOR']}"
+       end
 
 opts = lambda{ |opt| opt.start_with?('-') }
 args = ARGV.select(&opts)
