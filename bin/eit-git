@@ -4,6 +4,6 @@ ARGV.replace ['.'] if ARGV.empty?
 Dir.chdir(ARGV.first)
 
 files = `git ls-files`.tr('"', '').gsub(%r{/.+}, '').
-        split("\n").uniq#.map{ |file| "'#{file}'" }
+        split("\n").uniq.select{ |f| File.exist?(f) }
 
 system('eit', *files)
