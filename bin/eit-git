@@ -3,7 +3,7 @@
 ARGV.replace ['.'] if ARGV.empty?
 Dir.chdir(ARGV.first)
 
-files = `git ls-files`.gsub('"', '').gsub(%r{/.+}, '').
-        split("\n").uniq.map{ |file| "'#{file}'" }
+files = `git ls-files`.tr('"', '').gsub(%r{/.+}, '').
+        split("\n").uniq#.map{ |file| "'#{file}'" }
 
-`eit #{files.join(' ')}`
+system('eit', *files)
