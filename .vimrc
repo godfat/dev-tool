@@ -1,5 +1,9 @@
 scriptencoding utf-8
 
+"set foldcolumn=10
+hi foldcolumn ctermbg=black
+hi spellbad ctermbg=233
+
 set encoding=utf-8
 set fileencoding=utf-8
 set fenc=utf-8

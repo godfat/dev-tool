@@ -19,9 +19,7 @@ export DISPLAY=localhost:0.0
 
 # start fishing...
 if test $(which fish 2> /dev/null); then
-  export PROMPT_SHELL=fish
   fish
-  unset PROMPT_SHELL
 fi
 
 # homebrew bash completion
