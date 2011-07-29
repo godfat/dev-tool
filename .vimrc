@@ -5,7 +5,10 @@ set t_Co=256 " force using 256 colors because fish didn't like xterm-256color,
 
 "set foldcolumn=10
 hi foldcolumn ctermbg=black
-hi spellbad ctermbg=233
+hi spellbad   ctermbg=52
+hi spellcap   ctermbg=235
+hi spellrare  ctermbg=235
+hi spelllocal ctermbg=85
 
 set encoding=utf-8
 set fileencoding=utf-8
