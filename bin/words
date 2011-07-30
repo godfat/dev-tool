@@ -1,6 +1,16 @@
 #!/usr/bin/env ruby
 # encoding: utf-8
-def words s; puts s.scan(/\p{han}|\p{latin}+/).size; end
+def words s
+  h = {:cjk => 0, :eng => 0, :pun => 0}
+  s.gsub(/(\p{han})|(\p{latin}+)|(\p{punctuation}+)/) do |m|
+    h[:cjk] += 1 if $1
+    h[:eng] += 1 if $2
+    h[:pun] += 1 if $3
+  end
+  puts "        CJK: #{h[:cjk]}"
+  puts "      Latin: #{h[:eng]}"
+  puts "Punctuation: #{h[:pun]}"
+end
 if ARGV.empty?
   words($stdin.read)
 else
