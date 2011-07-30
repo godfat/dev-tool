@@ -1,3 +1,9 @@
 #!/usr/bin/env ruby
 # encoding: utf-8
-puts $stdin.read.scan(/\p{han}|\p{latin}+/).size
+def words s; puts s.scan(/\p{han}|\p{latin}+/).size; end
+if ARGV.empty?
+  words($stdin.read)
+else
+  path = nil
+  words(File.read(path)) while path = ARGV.shift
+end
