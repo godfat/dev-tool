@@ -3,13 +3,19 @@ scriptencoding utf-8
 set t_Co=256 " force using 256 colors because fish didn't like xterm-256color,
              " so i need to set TERM to xterm-color for fish!
 
-"set foldcolumn=10
-hi foldcolumn ctermbg=black
-hi spellbad   ctermbg=52
-hi spellcap   ctermbg=235
-hi spellrare  ctermbg=235
-hi spelllocal ctermbg=85
+"set foldcolumn=7
+hi foldcolumn  ctermbg=black
+hi colorcolumn ctermbg=235
+hi spellbad    ctermbg=52
+hi spelllocal  ctermbg=52
+hi spellcap    ctermbg=235
+hi spellrare   ctermbg=235
 
+highlight extrawhitespace ctermbg=darkred
+match     extrawhitespace /\s\+\%#\@<!$/
+
+set hlsearch
+set colorcolumn=80
 set encoding=utf-8
 set fileencoding=utf-8
 set fenc=utf-8
