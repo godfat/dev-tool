@@ -4,4 +4,3 @@ function fish_prompt -d 'custom prompt'
 end
 
 set -x PROMPT_SHELL fish
-set -x TERM xterm-color

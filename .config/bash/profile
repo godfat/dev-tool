@@ -19,6 +19,11 @@ export DISPLAY=localhost:0.0
 
 # start fishing...
 if test $(which fish 2> /dev/null); then
+  function fish {
+    export TERM=xterm-color
+    /usr/local/bin/fish $*
+    export TERM=xterm-256color
+  }
   fish
 fi
 
