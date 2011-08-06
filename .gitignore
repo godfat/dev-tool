@@ -7,6 +7,7 @@ bin/ignore-*
 .config/fish/fishd.*
 .config/fish/fish_history
 .config/fish/fish_history.tmp
+.config/rib/history.rb
 .config/irb/irb_history
 .config/gtk-2.0
 .config/inkscape
