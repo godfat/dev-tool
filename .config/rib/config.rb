@@ -1,3 +1,3 @@
 
 require 'rib/all'
-#require 'rib/dep/hirb'
+require 'rib/extra/autoindent'
