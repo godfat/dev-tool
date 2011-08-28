@@ -3,6 +3,8 @@ scriptencoding utf-8
 set t_Co=256 " force using 256 colors because fish didn't like xterm-256color,
              " so i need to set TERM to xterm-color for fish!
 
+colorscheme twilight256
+
 "set foldcolumn=7
 hi foldcolumn  ctermbg=black
 hi colorcolumn ctermbg=235
