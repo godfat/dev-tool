@@ -15,6 +15,7 @@ hi spellrare   ctermbg=235
 
 highlight extrawhitespace ctermbg=darkred
 match     extrawhitespace /\s\+\%#\@<!$/
+match     extrawhitespace /\t/
 
 set hlsearch
 set colorcolumn=80
