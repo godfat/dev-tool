@@ -18,6 +18,7 @@ match     extrawhitespace /\s\+\%#\@<!$/
 match     extrawhitespace /\t/
 
 set hlsearch
+set expandtab
 set colorcolumn=80
 set encoding=utf-8
 set fileencoding=utf-8
