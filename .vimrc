@@ -14,8 +14,7 @@ hi spellcap    ctermbg=235
 hi spellrare   ctermbg=235
 
 highlight extrawhitespace ctermbg=darkred
-match     extrawhitespace /\s\+\%#\@<!$/
-match     extrawhitespace /\t/
+match     extrawhitespace /\t\|\s\+\%#\@<!$/
 
 set hlsearch
 set expandtab
