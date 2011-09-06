@@ -1,18 +1,16 @@
 #!/usr/bin/env ruby
 
 prog = case ENV['EIT_EDITOR'] || 'textmate'
-         when 'textmate'; 'open -a /Applications/TextMate.app'
-         when 'sublime2'; 'subl --new-window'
+         when 'textmate'; %w[open -a /Applications/TextMate.app]
+         when 'sublime2'; %w[subl --new-window]
          else raise "Unknown EIT_EDITOR: #{ENV['EIT_EDITOR']}"
        end
 
 opts = lambda{ |opt| opt.start_with?('-') }
 args = ARGV.select(&opts)
 pths = ARGV.reject(&opts)
-argv = "#{args.join(' ')} #{pths.map{|p|"'#{p}'"}.join(' ')}"
 nons = pths.select{ |p| !File.exist?(p) }
-outs = `#{prog} #{argv}` if nons.empty? && argv.strip != ''
-puts outs if outs && outs.strip != ''
+system(*(prog + args + pths)) if nons.empty?
 puts "#{nons.map{|p|"'#{p}'"}.join(', ')} were not existed." if nons.any?
 
 exit unless $DEBUG
