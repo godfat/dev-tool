@@ -1,3 +1,4 @@
 termcapinfo xterm*|xs|rxvt ti@:te@
 shell -
 term xterm-256color
+vbell off
