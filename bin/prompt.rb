@@ -67,7 +67,7 @@ module Prompt
   def   reset &block; color('', &block); end
 
   def color rgb, &block
-    color_code("\x1b[#{rgb}m", &block)
+    color_code("\e[#{rgb}m", &block)
   end
 
   def green256 &block; color256(  2, &block); end
@@ -75,7 +75,7 @@ module Prompt
   def  gray256 &block; color256(102, &block); end
 
   def color256 rgb, &block
-    color_code("\x1b[38;5;#{rgb}m", &block)
+    color_code("\e[38;5;#{rgb}m", &block)
   end
 
   # private
