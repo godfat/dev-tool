@@ -17,7 +17,6 @@
   co = checkout
   ci = commit
 
-  logo = log ORIG_HEAD.. --stat
   loga = !git log --color --author=`git config user.email` | less --raw
   logg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
 
