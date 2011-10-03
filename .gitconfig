@@ -22,6 +22,7 @@
 
   whatnext = !git describe --tags --abbrev=0 | xargs git diff
   rollback = reset --hard
+  staged = diff --staged
   contri = shortlog -sn
   rmall = !git status | grep 'deleted:' | sed -E 's/.*\\deleted: +//' | xargs git rm
   aliases = !git config --get-regexp 'alias.*' | colrm 1 6 | sed 's/[ ]/ = /'
