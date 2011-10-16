@@ -51,8 +51,7 @@ set ignorecase                 " ignore case when searching
 set smartcase                  " ignore case when searching lower cases
 set spell                      " spell checker for non-native English speaker
 
-syntax match English /[!-~]/ contains=@spell
-syntax match Normal /[^!-~]/ contains=@nospell
+syntax match Normal /[^!-~]/ contains=@NoSpell
 
 set backupdir=~/tmp,/tmp
 set directory=~/tmp,/tmp
