@@ -40,6 +40,7 @@ syntax on
 filetype on
 filetype plugin on
 filetype indent on
+au BufNewFile,BufRead *.md set filetype=markdown
 
 set wildmenu                   " i need friendly menu
 set wildmode=list:longest
