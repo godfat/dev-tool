@@ -1,1 +1,1 @@
-gem: --user -E --no-ri --no-rdoc
+gem: --user --env-shebang --no-rdoc --no-ri
