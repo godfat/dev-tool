@@ -20,7 +20,7 @@
   loga = !git log --color --author=`git config user.email` | less --raw
   logg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
 
-  whatnext = !git describe --tags --abbrev=0 | xargs git diff
+  whatnext = !git describe --tags --abbrev=0 --match '*[0-9].[0-9]' | xargs git diff
   rollback = reset --hard
   staged = diff --staged
   contri = shortlog -sn
