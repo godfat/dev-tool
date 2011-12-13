@@ -47,7 +47,7 @@ case cmd = ARGV.find{ |arg| !arg.start_with?('-') }
     sh 'git reset --hard'
     sh 'git config prompt.hide true'
 
-    source = 'source .config/dev-tool/bash_profile'
+    source = 'source .config/bash/profile'
 
     # update .bash_profile, don't put duplicated source
     profile = if File.exist?('.bash_profile')
