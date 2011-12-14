@@ -6,23 +6,24 @@ def sh command
 end
 
 name, version = ARGV
-gem name, version if version
+begin
+  gem name, version
+rescue LoadError
+end
 
-# find the exact gem name first, version is lexically descending ordered
-# e.g. 3 > 13
-if path_gem = Gem.path.find{ |path|
-                path_gem = Dir["#{path}/gems/*"].sort{|a,b|b<=>a}.find{ |p|
-                             n = Regexp.escape(name)
-                             p =~ if version
-                                    /#{n}\-#{Regexp.escape(version)}/
-                                  else
-                                    /#{n}\-[^\/]+$/
-                                  end
-                           }
-                break path_gem if path_gem}
+# find the exact gem
+if path_gem = Gem.path.find{ |base|
+     path_gem = $LOAD_PATH.find{ |path|
+       path_gem = path[%r{#{base}/gems/#{name}\-[^/]+/}]
+       break path_gem if path_gem
+     }
+     break path_gem if path_gem
+   }
   sh("eit #{path_gem}")
 
+# find the require file
 elsif path = Gem.find_files("#{name}.rb").first
+  # favor gem first (e.g. rake gem)
   if path_gem = Gem.path.find{ |p| break $1 if path =~ %r{(#{p}(/[^/]+){2})} }
     sh("eit #{path_gem}")
   else
