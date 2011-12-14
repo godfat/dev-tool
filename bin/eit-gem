@@ -8,13 +8,35 @@ end
 name, version = ARGV
 gem name, version if version
 
-if path = Gem.find_files("#{name}.rb").first
+# find the exact gem name first, version is lexically descending ordered
+# e.g. 3 > 13
+if path_gem = Gem.path.find{ |path|
+                path_gem = Dir["#{path}/gems/*"].sort{|a,b|b<=>a}.find{ |p|
+                             n = Regexp.escape(name)
+                             p =~ if version
+                                    /#{n}\-#{Regexp.escape(version)}/
+                                  else
+                                    /#{n}\-[^\/]+$/
+                                  end
+                           }
+                break path_gem if path_gem}
+  sh("eit #{path_gem}")
+
+elsif path = Gem.find_files("#{name}.rb").first
   if path_gem = Gem.path.find{ |p| break $1 if path =~ %r{(#{p}(/[^/]+){2})} }
     sh("eit #{path_gem}")
   else
     sh("eit #{path}")
   end
+
 else
   puts("404 Not Found")
   exit(1)
 end
+
+__END__
+tests:
+eit-gem rib/version
+eit-gem rib/version 1.0.0
+eit-gem rib
+eit-gem rib 1.0.0
