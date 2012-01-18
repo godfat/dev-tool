@@ -55,3 +55,7 @@ syntax match Normal /[^!-~]/ contains=@NoSpell
 
 set backupdir=~/tmp,/tmp
 set directory=~/tmp,/tmp
+
+runtime bundle/vim-pathogen/autoload/pathogen.vim
+call pathogen#infect()
+autocmd vimenter * if !argc() | NERDTree | endif
