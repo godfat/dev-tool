@@ -1,0 +1,3 @@
+#!/bin/sh
+
+git log --color --author=`git config user.email` $*
