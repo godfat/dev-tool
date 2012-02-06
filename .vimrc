@@ -34,7 +34,6 @@ set scrolloff=3                " keep 3 lines between scroll
 set history=1000               " undo history
 set cmdheight=2
 set shiftwidth=2               " tab width?
-set cmdheight=2
 
 syntax on
 filetype on
