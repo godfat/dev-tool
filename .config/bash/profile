@@ -1,6 +1,6 @@
 
 # common setting
-export PATH=/usr/local/bin:/usr/local/sbin:$PATH
+export PATH=~/.cabal/bin:/usr/local/bin:/usr/local/sbin:$PATH
 
 rubies=`ls -d ~/.gem/*/* | egrep '([0-9]\.)+[0-9]$'`
 
