@@ -14,7 +14,7 @@ end
 # find the exact gem
 if path_gem = Gem.path.find{ |base|
      path_gem = $LOAD_PATH.find{ |path|
-       path_gem = path[%r{#{base}/gems/#{name}\-[^/]+/}]
+       path_gem = path[%r{#{base}/gems/#{name}\-[^/-]+/}]
        break path_gem if path_gem
      }
      break path_gem if path_gem
