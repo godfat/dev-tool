@@ -1,18 +1,20 @@
 #!/usr/bin/env ruby
 
-opts = lambda{ |opt| opt.start_with?('-') }
-args = ARGV.select(&opts)
-pths = ARGV.reject(&opts)
-nons = pths.select{ |p| !File.exist?(p) }
-prog = case editor = ENV['EIT_EDITOR'] || ENV['EDITOR'] || 'vim'
-       when 'textmate'; %w[open -a /Applications/TextMate.app]
-       when 'sublime2'; %w[subl --new-window]
-       else           ; [editor]
-       end
+opts  = lambda{ |opt | opt.start_with?('-') }
+exist = lambda{ |path| File.exist?(path)    }
+args  =  ARGV.select(&opts)
+paths =  ARGV.reject(&opts)
+files = paths.select(&exist)
+nons  = paths.reject(&exist)
+prog  = case editor = ENV['EIT_EDITOR'] || ENV['EDITOR'] || 'vim'
+        when 'textmate'; %w[open -a /Applications/TextMate.app]
+        when 'sublime2'; %w[subl --new-window]
+        else           ; [editor]
+        end
 
-cmds = prog + args + pths
+cmds = prog + args + files
 
-if nons.empty?
+unless files.empty?
   puts(cmds.join(' '))
   system(*cmds)
 end
