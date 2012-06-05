@@ -58,4 +58,6 @@ set directory=~/tmp,/tmp
 
 runtime bundle/vim-pathogen/autoload/pathogen.vim
 call pathogen#infect()
+
+let NERDTreeShowHidden=1
 autocmd vimenter * if !argc() | NERDTree | endif
