@@ -15,11 +15,13 @@ prog  = case editor = ENV['EIT_EDITOR'] || ENV['EDITOR'] || 'vim'
 cmds = prog + args + files
 
 unless files.empty?
-  puts(cmds.join(' '))
+  puts("\e[33m#{cmds.join(' ')}\e[m")
   system(*cmds)
 end
 
-puts "#{nons.map{|p|"'#{p}'"}.join(', ')} were not existed." if nons.any?
+if nons.any?
+  puts "\e[35m#{nons.map{|p|"'#{p}'"}.join(', ')} were not existed.\e[m"
+end
 
 exit unless $DEBUG
 
