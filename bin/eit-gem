@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 
 def sh command
-  puts(command)
+  puts(command) if $DEBUG
   exit(1) unless system(command)
 end
 
