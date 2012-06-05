@@ -10,7 +10,11 @@ opts = lambda{ |opt| opt.start_with?('-') }
 args = ARGV.select(&opts)
 pths = ARGV.reject(&opts)
 nons = pths.select{ |p| !File.exist?(p) }
-system(*(prog + args + pths)) if nons.empty?
+cmds = prog + args + pths
+if nons.empty?
+  puts(cmds.join(' '))
+  system(*cmds)
+end
 puts "#{nons.map{|p|"'#{p}'"}.join(', ')} were not existed." if nons.any?
 
 exit unless $DEBUG
