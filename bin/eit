@@ -1,20 +1,22 @@
 #!/usr/bin/env ruby
 
+opts = lambda{ |opt| opt.start_with?('-') }
+args = ARGV.select(&opts)
+pths = ARGV.reject(&opts)
+nons = pths.select{ |p| !File.exist?(p) }
 prog = case editor = ENV['EIT_EDITOR'] || ENV['EDITOR'] || 'vim'
        when 'textmate'; %w[open -a /Applications/TextMate.app]
        when 'sublime2'; %w[subl --new-window]
        else           ; [editor]
        end
 
-opts = lambda{ |opt| opt.start_with?('-') }
-args = ARGV.select(&opts)
-pths = ARGV.reject(&opts)
-nons = pths.select{ |p| !File.exist?(p) }
 cmds = prog + args + pths
+
 if nons.empty?
   puts(cmds.join(' '))
   system(*cmds)
 end
+
 puts "#{nons.map{|p|"'#{p}'"}.join(', ')} were not existed." if nons.any?
 
 exit unless $DEBUG
