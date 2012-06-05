@@ -1,9 +1,9 @@
 #!/usr/bin/env ruby
 
-prog = case ENV['EIT_EDITOR'] || 'textmate'
-         when 'textmate'; %w[open -a /Applications/TextMate.app]
-         when 'sublime2'; %w[subl --new-window]
-         else raise "Unknown EIT_EDITOR: #{ENV['EIT_EDITOR']}"
+prog = case editor = ENV['EIT_EDITOR'] || ENV['EDITOR'] || 'vim'
+       when 'textmate'; %w[open -a /Applications/TextMate.app]
+       when 'sublime2'; %w[subl --new-window]
+       else           ; [editor]
        end
 
 opts = lambda{ |opt| opt.start_with?('-') }
