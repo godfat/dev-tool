@@ -10,16 +10,15 @@ remote = if ARGV.empty?
            `git remote`.split(/\s+/)
          else
            ARGV
-         # if size == 1 then first, otherwise nil
-         end.inject{ |r, i| i ? nil : r }
+         end
 
-if remote.nil?
-  puts("Which remote do you want to track?")
+if remote.size > 1
+  puts("Which remote do you want to track? Pick one: #{remote.join(', ')}")
   puts("Usage: git-track [remote]")
   exit(1)
 end
 
-sh("git config branch.#{branch}.remote #{remote}")
+sh("git config branch.#{branch}.remote #{remote.first}")
 sh("git config branch.#{branch}.merge refs/heads/#{branch}")
 
 __END__
