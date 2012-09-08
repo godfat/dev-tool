@@ -1,0 +1,23 @@
+#!/usr/bin/env ruby
+
+require 'bundler/settings'
+
+module Bundler
+  class Settings
+    def path
+      key  = key_for(:path)
+      path = ENV[key]
+      return path if path && !@local_config.key?(key)
+
+      if path = self[:path] || @global_config[key]
+        "#{path}/#{Bundler.ruby_scope}"
+      else
+        Bundler.rubygems.gem_dir
+      end
+    end
+  end
+end
+
+bundle = Gem.path.find{ |p| File.exist?("#{p}/bin/bundle") }
+raise "bundler not installed" if bundle.nil?
+load "#{bundle}/bin/bundle"
