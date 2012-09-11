@@ -1,6 +1,11 @@
 #!/usr/bin/env ruby
 
-require 'bundler/settings'
+begin
+  require 'bundler/settings'
+rescue LoadError
+  puts "Run \e[35m`gem install bundler`\e[0m to install bundler."
+  exit 1
+end
 
 module Bundler
   class Settings
