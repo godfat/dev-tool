@@ -1,3 +1,0 @@
-#!/bin/sh
-
-bundle exec rainbows -c ~/.config/ruby/rainbows.rb $* ~/.config/ruby/rails_config.ru
