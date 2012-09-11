@@ -1,6 +1,4 @@
 #!/usr/bin/env ruby
 
 require_relative '../.config/bundler/bundler/monkey'
-bundle = Gem.path.find{ |p| File.exist?("#{p}/bin/bundle") }
-raise "bundler not installed" if bundle.nil?
-load "#{bundle}/bin/bundle"
+load "#{Gem.path.find{ |p| File.exist?("#{p}/bin/bundle") }}/bin/bundle"
