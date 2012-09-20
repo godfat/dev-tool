@@ -11,6 +11,9 @@ do
   fi
 done
 
+# monkey patch for bundler
+export RUBYOPT=-I~/.config/bundler
+
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 
