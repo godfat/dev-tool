@@ -38,4 +38,4 @@ sh("sudo dscl . create /Users/#{name} PrimaryGroupID 0")
 # setup home
 sh("sudo dscl . create /Users/#{name} dsAttrTypeNative:home /Users/#{name}")
 sh("sudo mkdir /Users/#{name}")
-sh("sudo chown sftp:staff /Users/#{name}")
+sh("sudo chown #{name}:staff /Users/#{name}")
