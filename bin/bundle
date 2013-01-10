@@ -1,4 +1,0 @@
-#!/usr/bin/env ruby
-
-require_relative '../.config/bundler/bundler/monkey'
-load "#{Gem.path.find{ |p| File.exist?("#{p}/bin/bundle") }}/bin/bundle"
