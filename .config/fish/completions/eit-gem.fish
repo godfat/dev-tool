@@ -6,4 +6,4 @@ function __fish_eit_gem_sed
 end
 
 complete -f -c eit-gem -a '(gem list | sed -E "s/ \(.+\)//")' -d 'Gem'
-complete -f -c eit-gem -a "(find $__fish_eit_gem_path -name '*.rb' | __fish_eit_gem_sed)" -d 'File'
+complete -f -c eit-gem -a "(find $__fish_eit_gem_path -name '*.rb' 2> /dev/null | __fish_eit_gem_sed)" -d 'File'
