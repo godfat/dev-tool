@@ -4,9 +4,10 @@ result = Hash.new(0)
 
 `git ls-files`.lines.each do |file|
   next unless `file -b #{file}` =~ /text/i
-  `git blame #{file}`.scan(/\((.+?) \d{4}\-.+\).+?\s{2,}$/).each{ |(name)|
-    result[name.strip] += 1
-  }
+  `git blame #{file}`.force_encoding('UTF-8').
+    scan(/\((.+?) \d{4}\-.+\).+?\s{2,}$/).each{ |(name)|
+      result[name.strip] += 1
+    }
 end
 
 puts "Trailing Whitespaces Committer:" unless result.empty?
