@@ -1,0 +1,15 @@
+#!/usr/bin/env ruby
+
+result = Hash.new(0)
+
+`git ls-files`.lines.each do |file|
+  next unless `file -b #{file}` =~ /text/i
+  `git blame #{file}`.scan(/\((.+?) \d{4}\-.+\).+?\s{2,}$/).each{ |(name)|
+    result[name.strip] += 1
+  }
+end
+
+puts "Trailing Whitespaces Committer:" unless result.empty?
+result.sort_by{ |(_, count)| -count }.each do |(name, count)|
+  printf("%30s: %5d commits.\n", name, count)
+end
