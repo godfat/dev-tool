@@ -11,5 +11,5 @@ end
 
 puts "Trailing Whitespaces Committer:" unless result.empty?
 result.sort_by{ |(_, count)| -count }.each do |(name, count)|
-  printf("%30s: %5d commits.\n", name, count)
+  printf("%30s: %5d lines.\n", name, count)
 end
