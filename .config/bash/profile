@@ -2,6 +2,11 @@
 # common PATH
 export PATH=/usr/local/bin:/usr/local/sbin:$PATH
 
+# node?
+if test -d /usr/local/share/npm/bin; then
+  export PATH=/usr/local/share/npm/bin/:$PATH
+fi
+
 # cabal?
 if test -d ~/.cabal/bin; then
   export PATH=~/.cabal/bin:$PATH
