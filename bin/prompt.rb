@@ -19,13 +19,8 @@ module Prompt
   end
 
   def prompt
-    case which_shell
-      when 'fish'; "#{white{time}} #{white{where}}"           \
-                   "#{green{cwd}}#{cyan{git}}#{prompt_char} "
-
-      else       ; "#{gray256{time}} #{color256(22){where}}"  \
-                   "#{green{cwd}}#{cyan{git}}#{prompt_char} "
-    end
+    "#{gray256{time}} #{color256(22){where}}"  \
+    "#{green{cwd}}#{cyan{git}}#{prompt_char} "
   end
 
   def time
