@@ -46,7 +46,7 @@ if test $(which brew 2> /dev/null); then
   fi
 
   if test -f `brew --prefix`/etc/bash_completion; then
-    . `brew --prefix`/etc/bash_completion
+    source `brew --prefix`/etc/bash_completion
   fi
 fi
 
