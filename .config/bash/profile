@@ -36,7 +36,9 @@ export DISPLAY=localhost:0.0
 
 # start fishing...
 if test $(which fish 2> /dev/null); then
+  stty=`stty -g`
   fish
+  stty $stty
 fi
 
 # homebrew bash completion
