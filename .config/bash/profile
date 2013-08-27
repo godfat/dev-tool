@@ -55,8 +55,8 @@ if test -e ~/.rvm/scripts/rvm; then
   source ~/.rvm/scripts/rvm
 fi
 
-bash_prompt(){ PS1=`prompt.rb`; }
-export PROMPT_COMMAND=bash_prompt
+unset PS1
+export PROMPT_COMMAND=prompt.rb
 
 # probably should be inside .bashrc?
 # linux bash specific

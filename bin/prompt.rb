@@ -76,15 +76,10 @@ module Prompt
   # private
 
   def color_code code
-    c = case which_shell
-          when 'bash'; "\\[#{code}\\]"
-          else       ;       code
-        end
-
     if block_given?
-      "#{c}#{yield}#{reset}"
+      "#{code}#{yield}#{reset}"
     else
-      c
+      code
     end
   end
 
