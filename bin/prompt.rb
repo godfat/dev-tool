@@ -46,7 +46,7 @@ module Prompt
   end
 
   def git
-    hide? ? dirty : dirty_branch
+    if hide? then dirty else dirty_branch end
   end
 
   # utility
