@@ -37,6 +37,11 @@ export DISPLAY=localhost:0.0
 # start fishing...
 if test $(which fish 2> /dev/null); then
   stty=`stty -g`
+  function fish {
+    export TERM=xterm-color
+    `which fish` $*
+    export TERM=xterm-256color
+  }
   fish
   stty $stty
 fi
