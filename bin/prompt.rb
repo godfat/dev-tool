@@ -67,7 +67,11 @@ module Prompt
   def   reset &block; color( 0, &block); end
 
   def color rgb, &block
-    color_code("\e[#{rgb}m", &block)
+    if rgb == 0 && which_shell == 'fish'
+      "\e[30m\e(B\e[m" # fish -c 'set_color normal'
+    else
+      color_code("\e[#{rgb}m", &block)
+    end
   end
 
   def green256 &block; color256(  2, &block); end
