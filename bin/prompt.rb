@@ -3,11 +3,11 @@
 module Prompt
   module_function
   def which_shell
-    if ENV['PROMPT_SHELL']
-      'fish'
-    else
-      ENV['SHELL'][/\w+$/]
-    end
+    `ps -ocommand= #{Process.ppid}`[/\w+$/]
+  end
+
+  def color256?
+    (ENV['TERM'] || '').include?('256')
   end
 
   def prompt_char
@@ -19,8 +19,13 @@ module Prompt
   end
 
   def prompt
-    "#{gray256{time}} #{color256(22){where}}"  \
-    "#{green{cwd}}#{cyan{git}}#{prompt_char} "
+    if color256?
+      "#{gray256{time}} #{color256(22){where}}"  \
+      "#{green{cwd}}#{cyan{git}}#{prompt_char} "
+    else
+      "#{white{time}} #{white{where}}"           \
+      "#{green{cwd}}#{cyan{git}}#{prompt_char} "
+    end
   end
 
   def time
