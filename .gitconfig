@@ -10,6 +10,8 @@
   default = tracking
 [merge]
   log = true
+[rebase]
+  stat = true
 
 # https://git.wiki.kernel.org/index.php/Aliases
 [alias]
@@ -17,6 +19,7 @@
   co = checkout
   ci = commit
 
+  logt = log --topo-order
   logg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
 
   whatnext = !git describe --tags --abbrev=0 --match '*[0-9].[0-9]' | xargs git diff
@@ -25,5 +28,3 @@
   contri = shortlog -sn
   rmall = !git status | grep 'deleted:' | sed -E 's/.*\\deleted: +(.+)$/\\1/' | sed 's/ /\\\\ /g' | xargs git rm
   aliases = !git config --get-regexp 'alias.*' | colrm 1 6 | sed 's/[ ]/ = /'
-
-  coal = !git branch -r | egrep '^[^>]+$' | sed -E 's/(.+)\\/(.+)/git branch \\2 --track\\1\\/\\2/' | ruby -e 'puts $stdin.read.split(\"\n\").map{ |s| send(:`, s) }.reject(&:empty?)' 2> /dev/null
