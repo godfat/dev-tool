@@ -28,7 +28,7 @@ done
 
 # monkey patch for bundler
 if test -d ~/.config/bundler; then
-  export RUBYOPT=-I~/.config/bundler
+  export RUBYLIB=~/.config/bundler:$RUBYLIB
 fi
 
 # locale
