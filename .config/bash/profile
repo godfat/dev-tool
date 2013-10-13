@@ -7,11 +7,6 @@ if test -d /usr/local/share/npm/bin; then
   export PATH=/usr/local/share/npm/bin:$PATH
 fi
 
-# python?
-if test -d /usr/local/share/python; then
-  export PATH=/usr/local/share/python:$PATH
-fi
-
 # cabal?
 if test -d ~/.cabal/bin; then
   export PATH=~/.cabal/bin:$PATH
