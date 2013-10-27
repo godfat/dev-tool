@@ -33,7 +33,7 @@ module Prompt
   end
 
   def where
-    if ENV['PROMPT_HOST']
+    if ENV['SSH_CONNECTION']
       require 'socket'
       require 'etc'
       "#{Etc.getlogin}@#{Socket.gethostname} "
