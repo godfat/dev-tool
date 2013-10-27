@@ -10,8 +10,3 @@ Clone this into ~/ and source .config/dev-tool/bash_profile, or, for lazies:
 # How to update?
 
     dev-tool update
-
-# Environment Variable Options:
-
-1. set `PROMPT_PATH_ABBR` to enable path abbreviation
-2. set `PROMPT_SHELL` to specify different shell other than `SHELL`
