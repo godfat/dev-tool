@@ -1,4 +1,7 @@
 
+# Taken from:
+# https://github.com/bpinto/oh-my-fish/blob/master/plugins/rake/completions/rake.fish
+
 # fish completion for rake
 function __fish_rake_tasks
   rake -T ^/dev/null | awk '{print $2"\t"substr($0, index($0, $4))}'
