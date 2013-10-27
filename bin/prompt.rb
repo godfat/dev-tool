@@ -3,7 +3,7 @@
 module Prompt
   module_function
   def which_shell
-    `ps -ocommand= #{Process.ppid}`[/\w+$/]
+    @which_shell ||= `ps -ocommand= #{Process.ppid}`[/\w+$/]
   end
 
   def color256?
