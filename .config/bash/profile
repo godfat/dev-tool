@@ -13,7 +13,7 @@ if test -d ~/.cabal/bin; then
 fi
 
 # ruby?
-rubies=`ls -d ~/.gem/*/* | egrep '([0-9]\.)+[0-9]$'`
+rubies=`ls -d ~/.gem/*/* 2> /dev/null | egrep '([0-9]\.)+[0-9]$'`
 for path in $rubies ~
 do
   if test -d $path; then
