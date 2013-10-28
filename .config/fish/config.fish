@@ -1,6 +1,6 @@
 
 function _git_branch_name
-  echo (command git symbolic-ref HEAD ^/dev/null | sed -e 's|^refs/heads/||')
+  echo (command git branch ^/dev/null | grep -m1 '^\*' | cut -b 3-)
 end
 
 function _git_status_symbol
