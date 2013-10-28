@@ -57,7 +57,64 @@ if test -e ~/.rvm/scripts/rvm; then
   source ~/.rvm/scripts/rvm
 fi
 
-bash_prompt(){ PS1=`prompt.rb`; }
+_git_branch_name(){
+  echo `command git symbolic-ref HEAD 2>/dev/null | sed -e 's|^refs/heads/||'`
+}
+
+_git_status_symbol(){
+  git_status=`git status --porcelain 2>/dev/null`
+  if test -n "$git_status"; then
+    # Is there anyway to preserve newlines so we can reuse $git_status?
+    if git status --porcelain 2>/dev/null | grep '^.[^ ]' >/dev/null; then
+      echo '*' # dirty
+    else
+      echo '#' # all staged
+    fi
+  else
+    echo    '' # clean
+  fi
+}
+
+_remote_hostname(){
+  if test $SSH_CONNECTION; then
+    echo `whoami`@`hostname`' '
+  fi
+}
+
+bash_prompt(){
+  cyan=`echo -e '\[\e[36m\]'`
+  normal=`echo -e '\[\e[0m\]'`
+
+  time=`echo -e '\[\e[0m\]'`
+  remote=`echo -e '\[\e[0m\]'`
+
+  if echo $TERM | grep 256 >/dev/null; then
+    time=`echo -e '\[\e[38;5;102m\]'`
+    remote=`echo -e '\[\e[38;5;22m\]'`
+  fi
+
+  # stolen from https://github.com/fish-shell/fish-shell/blob/master/share/functions/prompt_pwd.fish
+  cwd=`echo -e '\[\e[32m\]'`\
+      `echo $PWD | sed -e "s|^$HOME|~|" -e 's-\([^/.]\)[^/]*/-\1/-g'`
+  git_status=
+  git_branch=`_git_branch_name`
+  git_hide_branch=`git config --get prompt.hide 2>/dev/null`
+
+  if test -n "$git_branch"; then
+    if test -n "$git_hide_branch"; then
+      git_status=`_git_status_symbol`
+    else
+      git_status=' '`_git_status_symbol``_git_branch_name`
+    fi
+  else
+    git_status=''
+  fi
+
+  time=$time`date '+%H:%M'`
+  remote=$remote`_remote_hostname`
+
+  PS1=`echo -ne $time $remote$cwd$cyan$git_status$normal'$ '`
+}
 export PROMPT_COMMAND=bash_prompt
 
 # probably should be inside .bashrc?
