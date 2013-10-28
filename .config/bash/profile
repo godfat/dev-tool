@@ -13,7 +13,7 @@ if test -d ~/.cabal/bin; then
 fi
 
 # ruby?
-rubies=`ls -d ~/.gem/*/* 2> /dev/null | egrep '([0-9]\.)+[0-9]$'`
+rubies=`ls -d ~/.gem/*/* 2>/dev/null | egrep '([0-9]\.)+[0-9]$'`
 for path in $rubies ~
 do
   if test -d $path; then
@@ -35,14 +35,14 @@ export EDITOR=vim
 export DISPLAY=localhost:0.0
 
 # start fishing...
-if test $(which fish 2> /dev/null); then
+if test $(which fish 2>/dev/null); then
   stty=`stty -g`
   fish # fish would mess up stty for bash
   stty $stty
 fi
 
 # homebrew bash completion
-if test $(which brew 2> /dev/null); then
+if test $(which brew 2>/dev/null); then
   if test -f `brew --prefix`/Library/Contributions/brew_bash_completion.sh; then
     source `brew --prefix`/Library/Contributions/brew_bash_completion.sh
   fi
