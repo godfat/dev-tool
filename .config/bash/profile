@@ -94,8 +94,7 @@ bash_prompt(){
   fi
 
   # stolen from https://github.com/fish-shell/fish-shell/blob/master/share/functions/prompt_pwd.fish
-  cwd=`echo -e '\[\e[32m\]'`\
-      `echo $PWD | sed -e "s|^$HOME|~|" -e 's-\([^/.]\)[^/]*/-\1/-g'`
+  cwd=`echo -e '\[\e[32m\]'``echo $PWD | sed -e "s|^$HOME|~|" -e 's-\([^/.]\)[^/]*/-\1/-g'`
   git_status=
   git_branch=`_git_branch_name`
   git_hide_branch=`git config --get prompt.hide 2>/dev/null`
