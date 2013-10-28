@@ -76,7 +76,7 @@ _git_status_symbol(){
 }
 
 _remote_hostname(){
-  if test $SSH_CONNECTION; then
+  if test -n "$SSH_CONNECTION"; then
     echo `whoami`@`hostname`' '
   fi
 }
