@@ -58,7 +58,7 @@ if test -e ~/.rvm/scripts/rvm; then
 fi
 
 _git_branch_name(){
-  echo (command git branch ^/dev/null | grep -m1 '^\*' | cut -b 3-)
+  echo `command git branch 2>/dev/null | grep -m1 '^\*' | cut -b 3-`
 }
 
 _git_status_symbol(){
