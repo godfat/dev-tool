@@ -1,3 +1,0 @@
-
-require 'ripl/rc'
-Ripl.config[:history] = '~/.config/irb/irb_history'
