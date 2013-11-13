@@ -1,0 +1,21 @@
+#!/usr/bin/env ruby
+
+stats = `git log --numstat --pretty=format:%aN`.
+  scan(/([^\n]+)\n(([\d\-]+\t[\d\-]+\t[^\n]+\n)+)\n/m).
+  inject(Hash.new{|r,k|r[k]=[0, 0, 0]}) do |r, (author, *stat)|
+    stat.drop(1).each do |line|
+      ins, del = line.scan(/\d+/).map(&:to_i)
+      r[author][0] += ins if ins
+      r[author][1] += del if del
+    end
+    r[author][2] += 1
+    r
+  end.to_a.sort_by{ |(_, (ins, del))| - ins - del }
+
+as =            stats.max_by{ |a| a[0].size }[0].size
+ns = Math.log10(stats.max_by{ |a| a[1].max  }[1].max).ceil
+
+stats.each do |(author, (ins, del, commits))|
+  printf("%#{as}s:\t%#{ns}d+\t%#{ns}d-\t%#{ns}d commits\n",
+          author,      ins,      del,   commits)
+end
