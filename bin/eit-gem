@@ -8,7 +8,9 @@ end
 name, version = ARGV
 begin
   gem name, version
-rescue LoadError
+rescue LoadError => e
+  puts e.message
+  exit 1
 end
 
 # find the exact gem
