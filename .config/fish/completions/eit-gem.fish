@@ -1,5 +1,5 @@
 
-set __fish_eit_gem_path (brew --prefix ruby)/lib/ruby/1.9.1
+set __fish_eit_gem_path (ruby -e 'puts RbConfig::CONFIG["rubylibdir"]')
 
 function __fish_eit_gem_sed
   sed s/(echo $__fish_eit_gem_path | sed 's/\//\\\\\//g')\\///
