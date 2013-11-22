@@ -4,7 +4,8 @@
 set __fish_eit_gem_path (ruby -e 'puts RbConfig::CONFIG["rubylibdir"]')
 
 function __fish_eit_gem_sed
-  sed s/(echo $__fish_eit_gem_path | sed 's/\//\\\\\//g')\\///
+  sed s/(echo $__fish_eit_gem_path | sed 's/\//\\\\\//g')\\/// | \
+  sed 's/\..*$//'
 end
 
 complete -f -c gem -n '__fish_use_subcommand' -xa 'eit\t"'(_ "Edit a gem")'"'
