@@ -32,6 +32,7 @@ export LANG=en_US.UTF-8
 
 # other settings
 export EDITOR=vim
+export EIT_EDITOR=eit
 export DISPLAY=localhost:0.0
 
 # start fishing...
