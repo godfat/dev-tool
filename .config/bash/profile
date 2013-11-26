@@ -32,9 +32,10 @@ export LANG=en_US.UTF-8
 
 # other settings
 export EDITOR=vim
-export EIT_EDITOR=eit
-export DISPLAY=localhost:0.0
+export GEM_EDITOR=eit
+export GEM_GREP=ag
 export GREP_OPTIONS='--color=auto'
+export DISPLAY=localhost:0.0
 
 # start fishing...
 if test $(which fish 2>/dev/null); then
