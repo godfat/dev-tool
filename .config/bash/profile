@@ -53,11 +53,6 @@ if test $(which brew 2>/dev/null); then
   fi
 fi
 
-# rvm scripts
-if test -e ~/.rvm/scripts/rvm; then
-  source ~/.rvm/scripts/rvm
-fi
-
 _git_branch_name(){
   echo `command git branch 2>/dev/null | grep -m1 '^\*' | cut -b 3-`
 }
