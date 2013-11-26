@@ -6,7 +6,7 @@ args  =  ARGV.select(&opts)
 paths =  ARGV.reject(&opts)
 files = paths.select(&exist)
 nons  = paths.reject(&exist)
-prog  = case editor = ENV['GUI_EDITOR'] || ENV['EDITOR'] || 'vim'
+prog  = case editor = ENV['EIT_EDITOR'] || ENV['EDITOR'] || 'vim'
         when 'textmate'; %w[open -a /Applications/TextMate.app]
         when 'sublime2'; %w[subl --new-window]
         when 'vim'     ; if files.size > 1
