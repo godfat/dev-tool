@@ -24,6 +24,7 @@
 
   whatnext = !git describe --tags --abbrev=0 --match '*[0-9].[0-9]' | xargs git diff
   rollback = reset --hard
+  damnation = !git reset --hard && git clean -fd
   staged = diff --staged
   contri = shortlog -sn
   rmall = !git status | grep 'deleted:' | sed -E 's/.*\\deleted: +(.+)$/\\1/' | sed 's/ /\\\\ /g' | xargs git rm
