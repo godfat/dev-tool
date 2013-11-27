@@ -25,6 +25,6 @@
   rollback = reset --hard
   damnation = !git reset --hard && git clean -fd
   staged = diff --staged
-  contri = shortlog -sn
+  contri = shortlog -sne --no-merges
   rmall = !git status | grep 'deleted:' | sed -E 's/.*\\deleted: +(.+)$/\\1/' | sed 's/ /\\\\ /g' | xargs git rm
   aliases = !git config --get-regexp 'alias.*' | colrm 1 6 | sed 's/[ ]/ = /'
