@@ -1,12 +1,14 @@
 #!/usr/bin/env ruby
 
-stats = `git log --numstat --pretty=format:%aN`.
+stats = `git log --no-merges --numstat --pretty=format:%aN`.
   scan(/([^\n]+)\n(([\d\-]+\t[\d\-]+\t[^\n]+\n)+)\n/m).
   inject(Hash.new{|r,k|r[k]=[0, 0, 0]}) do |r, (author, *stat)|
-    stat.drop(1).each do |line|
-      ins, del = line.scan(/\d+/).map(&:to_i)
-      r[author][0] += ins if ins
-      r[author][1] += del if del
+    stat.each do |commit|
+      commit.each_line do |line|
+        ins, del = line[/^.+\t.+/].split(' ').map(&:to_i)
+        r[author][0] += ins
+        r[author][1] += del
+      end
     end
     r[author][2] += 1
     r
