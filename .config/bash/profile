@@ -21,11 +21,6 @@ do
   fi
 done
 
-# monkey patch for bundler
-if test -d ~/.config/bundler; then
-  export RUBYLIB=~/.config/bundler:$RUBYLIB
-fi
-
 # locale
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
