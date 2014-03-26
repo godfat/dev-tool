@@ -41,6 +41,8 @@ case cmd = ARGV.find{ |arg| !arg.start_with?('-') }
 
     check_installation!
 
+    sh 'rm /tmp/dev-tool' if File.exist?('/tmp/dev-tool')
+
     sh 'git clone --no-checkout git://github.com/godfat/dev-tool.git'
     sh 'mv dev-tool/.git .'
     sh 'rmdir dev-tool'
