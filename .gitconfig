@@ -6,6 +6,7 @@
   ui = auto
 [diff]
   renames = copy
+  algorithm = patience
 [push]
   default = tracking
 [merge]
