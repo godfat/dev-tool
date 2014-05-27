@@ -16,8 +16,9 @@ stats = `git log --no-merges --numstat --pretty=format:%aN`.
 
 as =            stats.max_by{ |a| a[0].size }[0].size
 ns = Math.log10(stats.max_by{ |a| a[1].max  }[1].max).ceil
+rs = Math.log10(stats.map{ |a| a[1][0].to_f/a[1][1] }.max).ceil + 3
 
 stats.each do |(author, (ins, del, commits))|
-  printf("%#{as}s:\t%#{ns}d+\t%#{ns}d-\t%#{ns}d commits\n",
-          author,      ins,      del,   commits)
+  printf("%#{as}s:\t%#{ns}d+\t%#{ns}d-\t%#{ns}d commits\t%#{rs}.2f+/-\n",
+          author,      ins,      del,   commits, (ins.to_f/del).round(2))
 end
