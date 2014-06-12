@@ -59,5 +59,19 @@ set directory=~/tmp,/tmp
 runtime bundle/vim-pathogen/autoload/pathogen.vim
 call pathogen#infect()
 
-let NERDTreeShowHidden=1
-autocmd vimenter * if !argc() | NERDTree | endif
+" ctrlp
+nnoremap <C-p> :Unite file_rec/async<cr>i
+
+" grep with ag
+nnoremap <space>/ :Unite grep:.<cr>
+if executable('ag')
+  let g:unite_source_grep_command = 'ag'
+  let g:unite_source_grep_default_opts = '--nogroup --nocolor --column'
+  let g:unite_source_grep_recursive_opt = ''
+endif
+
+" directory explorer
+let g:vimfiler_as_default_explorer = 1
+let g:vimfiler_edit_action = 'tabopen'
+autocmd FileType vimfiler nmap <buffer> <enter>       <Plug>(vimfiler_edit_file)
+autocmd FileType vimfiler nmap <buffer> <2-LeftMouse> <Plug>(vimfiler_edit_file)
