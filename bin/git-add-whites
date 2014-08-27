@@ -1,0 +1,6 @@
+#!/bin/sh
+
+# credits: https://twitter.com/plexus/status/504554652671934465
+
+git add --all
+git diff --cached --ignore-space-change | git apply --cached --reverse
