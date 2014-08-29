@@ -4,9 +4,12 @@
   interactive = auto
   status = auto
   ui = auto
+[log]
+  decorate = auto
 [diff]
   renames = copy
   algorithm = patience
+  wordregex = \\w+|\\S
 [push]
   default = tracking
 [merge]
@@ -26,6 +29,7 @@
   rollback = reset --hard
   damnation = !git reset --hard && git clean -fd
   staged = diff --staged
+  colwrd = diff --color-words
   contri = shortlog -sne --no-merges
   rmall = !git status | grep 'deleted:' | sed -E 's/.*\\deleted: +(.+)$/\\1/' | sed 's/ /\\\\ /g' | xargs git rm
   aliases = !git config --get-regexp 'alias.*' | colrm 1 6 | sed 's/[ ]/ = /'
