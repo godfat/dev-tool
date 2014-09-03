@@ -1,0 +1,4 @@
+#!/bin/sh
+
+git branch --remote --merged | grep $1 |\
+grep -v '^\*' | cut -f2- -d/ | grep -v '^HEAD'

@@ -1,0 +1,12 @@
+#!/bin/sh
+
+old=$(git show --no-patch --format=%H $1 -- 2> /dev/null)
+new=$(git show --no-patch --format=%H $2 -- 2> /dev/null)
+
+echo Tagging $1 $2
+
+# consider good when $new = $old
+if test -z $old || test $new != $old
+then
+  git tag $1 $2
+fi
