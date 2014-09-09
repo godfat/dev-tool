@@ -1,0 +1,9 @@
+#!/bin/sh
+
+if test "$1"; then
+  port=$1
+else
+  port=4331
+fi
+
+socat tcp4-listen:$port,reuseaddr system:'echo $SOCAT_PEERADDR | tee /dev/tty'
