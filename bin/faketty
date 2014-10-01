@@ -1,9 +1,9 @@
 #!/bin/sh
 
 uname=`uname`
-if test $uname == 'Linux'; then
+if test $uname = 'Linux'; then
   cmd="script -fqc '$*' /dev/null"
-elif test $uname == 'Darwin'; then
+elif test $uname = 'Darwin'; then
   cmd="script -q /dev/null $*"
 else
   echo "What OS are you using?"
