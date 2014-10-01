@@ -75,19 +75,19 @@ _remote_hostname(){
 }
 
 bash_prompt(){
-  cyan=`echo -e '\[\e[36m\]'`
-  normal=`echo -e '\[\e[0m\]'`
+  cyan=`printf '\[\e[36m\]'`
+  normal=`printf '\[\e[0m\]'`
 
-  time=`echo -e '\[\e[0m\]'`
-  remote=`echo -e '\[\e[0m\]'`
+  time=`printf '\[\e[0m\]'`
+  remote=`printf '\[\e[0m\]'`
 
   if echo $TERM | grep 256 >/dev/null; then
-    time=`echo -e '\[\e[38;5;102m\]'`
-    remote=`echo -e '\[\e[38;5;22m\]'`
+    time=`printf '\[\e[38;5;102m\]'`
+    remote=`printf '\[\e[38;5;22m\]'`
   fi
 
   # stolen from https://github.com/fish-shell/fish-shell/blob/master/share/functions/prompt_pwd.fish
-  cwd=`echo -e '\[\e[32m\]'``echo $PWD | sed -e "s|^$HOME|~|" -e 's-\([^/.]\)[^/]*/-\1/-g'`
+  cwd=`printf '\[\e[32m\]'``echo $PWD | sed -e "s|^$HOME|~|" -e 's-\([^/.]\)[^/]*/-\1/-g'`
   git_status=
   git_branch=`_git_branch_name`
   git_hide_branch=`git config --get prompt.hide 2>/dev/null`
@@ -105,7 +105,7 @@ bash_prompt(){
   time=$time`date '+%H:%M'`
   remote=$remote`_remote_hostname`
 
-  PS1=`echo -ne $time $remote$cwd$cyan$git_status$normal'$ '`
+  PS1=`echo $time $remote$cwd$cyan$git_status$normal'$ '`
 }
 export PROMPT_COMMAND=bash_prompt
 
