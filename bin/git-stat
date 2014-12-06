@@ -2,7 +2,7 @@
 
 def gitstat path='.'
   `git log --no-merges --numstat --pretty=format:%aN -- #{path}`.
-    scan(/([^\n]+)\n(([\d\-]+\t[\d\-]+\t[^\n]+\n)+)\n/m).
+    scan(/([^\n]+)\n(([\d\-]+\t[\d\-]+\t[^\n]+\n)+)\n?/m).
     inject(Hash.new{|r,k|r[k]=[0, 0, 0]}) do |r, (author, *stat)|
       stat.each do |commit|
         commit.each_line do |line|
