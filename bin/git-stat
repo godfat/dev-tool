@@ -19,8 +19,8 @@ end
 def report path='.', out=$stdout
   stat = gitstat(path)
   as =            stat.max_by{ |a| a[0].size }[0].size
-  ns = Math.log10(stat.max_by{ |a| a[1].max  }[1].max).ceil
-  rs = Math.log10(stat.map{ |a| if a[1][1].zero? then 0
+  ns = Math.log10(stat.max_by{ |a| a[1].max  }[1].max).ceil + 1
+  rs = Math.log10(stat.map{ |a| if a[1][1].zero? then 3 # Inf
                                 else a[1][0].to_f/a[1][1]
                                 end }.max).ceil + 3 # .xx
 
