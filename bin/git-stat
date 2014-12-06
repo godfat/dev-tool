@@ -1,26 +1,41 @@
 #!/usr/bin/env ruby
 
-stats = `git log --no-merges --numstat --pretty=format:%aN`.
-  scan(/([^\n]+)\n(([\d\-]+\t[\d\-]+\t[^\n]+\n)+)\n/m).
-  inject(Hash.new{|r,k|r[k]=[0, 0, 0]}) do |r, (author, *stat)|
-    stat.each do |commit|
-      commit.each_line do |line|
-        ins, del = line[/^.+\t.+/].split(' ').map(&:to_i)
-        r[author][0] += ins
-        r[author][1] += del
+def gitstat path='.'
+  `git log --no-merges --numstat --pretty=format:%aN -- #{path}`.
+    scan(/([^\n]+)\n(([\d\-]+\t[\d\-]+\t[^\n]+\n)+)\n/m).
+    inject(Hash.new{|r,k|r[k]=[0, 0, 0]}) do |r, (author, *stat)|
+      stat.each do |commit|
+        commit.each_line do |line|
+          ins, del = line[/^.+\t.+/].split(' ').map(&:to_i)
+          r[author][0] += ins
+          r[author][1] += del
+        end
       end
-    end
-    r[author][2] += 1
-    r
-  end.to_a.sort_by{ |(_, (ins, del))| - ins - del }
+      r[author][2] += 1
+      r
+    end.to_a.sort_by{ |(_, (ins, del))| - ins - del }
+end
 
-as =            stats.max_by{ |a| a[0].size }[0].size
-ns = Math.log10(stats.max_by{ |a| a[1].max  }[1].max).ceil
-rs = Math.log10(stats.map{ |a| if a[1][1].zero? then 0
-                               else a[1][0].to_f/a[1][1]
-                               end }.max).ceil + 3 # .xx
+def report path='.', out=$stdout
+  stat = gitstat(path)
+  as =            stat.max_by{ |a| a[0].size }[0].size
+  ns = Math.log10(stat.max_by{ |a| a[1].max  }[1].max).ceil
+  rs = Math.log10(stat.map{ |a| if a[1][1].zero? then 0
+                                else a[1][0].to_f/a[1][1]
+                                end }.max).ceil + 3 # .xx
 
-stats.each do |(author, (ins, del, commits))|
-  printf("%#{as}s:\t%#{ns}d+\t%#{ns}d-\t%#{ns}d commits\t%#{rs}.2f+/-\n",
-          author,      ins,      del,   commits, (ins.to_f/del).round(2))
+  out.puts "git stat #{path}"
+  stat.each do |(author, (ins, del, commits))|
+    out.printf(
+      "%#{as}s:\t%#{ns}d+\t%#{ns}d-\t%#{ns}d commits\t%#{rs}.2f+/-\n",
+       author,      ins,      del,   commits, (ins.to_f/del).round(2))
+  end
+  out
+end
+
+if ARGV.empty?
+  report
+else
+  require 'stringio'
+  puts ARGV.map{ |path| report(path, StringIO.new).string }.join("\n")
 end
