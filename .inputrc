@@ -1,0 +1,2 @@
+"\e[A": history-substring-search-backward
+"\e[B": history-substring-search-forward
