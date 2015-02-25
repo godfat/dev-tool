@@ -29,7 +29,7 @@ export LANG=en_US.UTF-8
 export EDITOR=vim
 export GEM_EDITOR=eit
 export GEM_GREP=ag
-export DISPLAY=localhost:0.0
+export DISPLAY=:0
 
 # start fishing...
 if test $(which fish 2>/dev/null); then
