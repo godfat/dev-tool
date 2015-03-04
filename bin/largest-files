@@ -1,0 +1,9 @@
+#!/bin/sh
+
+if test "$*"; then
+  n=$*
+else
+  n='10'
+fi
+
+find . -printf '%s %p\n'| numfmt --to=iec | sort -hr | head -$n
