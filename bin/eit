@@ -24,6 +24,17 @@ prog  = case editor = ENV['EIT_EDITOR'] || ENV['EDITOR'] || 'vim'
         else           ; [editor]
         end
 
+if nons.first =~ /\A(.+):(\d+)\z/
+  case editor
+  when 'vim'
+    f, line = nons.shift.split(':')
+    files << f
+    args  << "+#{line}"
+  when 'sublime2'
+    files << nons.shift
+  end
+end
+
 cmds = prog + args + files
 
 puts("\e[33m#{cmds.join(' ')}\e[m")
@@ -44,6 +55,7 @@ H = HighLine.new
  eit --help
  eit asd
  eit ~/.bash_profile
+ eit ~/.bash_profile:2
  eit ~/.bash_profile ~/.vimrc
  eit ~/.bash_profile asd'.split("\n").map(&:strip).each do |cmd|
  puts `#{cmd}`
