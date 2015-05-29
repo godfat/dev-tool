@@ -30,6 +30,7 @@ export EDITOR=vim
 export GEM_EDITOR=eit
 export GEM_GREP=ag
 export DISPLAY=:0
+export FZF_DEFAULT_OPTS='-x'
 
 # start fishing...
 if test $(which fish 2>/dev/null); then
