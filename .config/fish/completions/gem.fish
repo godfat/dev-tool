@@ -1,5 +1,10 @@
 
-. $fish_complete_path[3]/gem.fish
+for path in $fish_complete_path[2..-1]
+  if test -e $path/gem.fish
+    . $path/gem.fish
+    break
+  end
+end
 
 set __fish_eit_gem_path (ruby -e 'puts RbConfig::CONFIG["rubylibdir"]')
 
