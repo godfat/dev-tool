@@ -50,9 +50,5 @@ def color rgb
   if block_given? then "#{c}#{yield}#{reset}" else c end
 end
 
-if ARGV.empty?
-  report
-else
-  require 'stringio'
-  puts ARGV.map{ |path| report(path, StringIO.new).string }.join("\n")
-end
+require 'stringio'
+puts report(ARGV.join(' '), StringIO.new).string
