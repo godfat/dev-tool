@@ -1,0 +1,3 @@
+#!/bin/sh
+
+echo $* | xargs -d, -n1 -P2 sh -c
