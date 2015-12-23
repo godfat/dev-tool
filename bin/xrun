@@ -1,3 +1,4 @@
 #!/bin/sh
 
-echo $* | xargs -d, -n1 -P2 sh -c
+n=`echo $* | grep -o , | wc -l`
+echo $* | xargs -d, -n1 -P$(($n + 1)) sh -c
