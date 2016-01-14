@@ -5,3 +5,4 @@ vbell off
 defscrollback 65535
 bindkey -m ^b stuff ^u
 bindkey -m ^f stuff ^d
+escape ^ss
