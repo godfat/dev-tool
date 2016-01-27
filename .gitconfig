@@ -25,7 +25,7 @@
   logt = log --topo-order
   logg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
 
-  whatnext = !git describe --tags --abbrev=0 --match '*[0-9].[0-9]' | xargs -I! git diff ! -- $*
+  whatnext = !git describe --tags --abbrev=0 | xargs -I! git diff ! -- $*
   rollback = reset --hard
   damnation = !git reset --hard && git clean -fd
   staged = diff --staged
