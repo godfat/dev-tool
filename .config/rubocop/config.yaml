@@ -1,0 +1,65 @@
+Metrics/AbcSize:
+  Max: 40
+Metrics/CyclomaticComplexity:
+  Max: 10
+Metrics/MethodLength:
+  Max: 30
+Metrics/PerceivedComplexity:
+  Max: 15
+Style/Alias:
+  EnforcedStyle: prefer_alias_method
+Style/BlockDelimiters:
+  Enabled: false
+Style/ClassCheck:
+  EnforcedStyle: kind_of?
+Style/ConstantName:
+  Enabled: false
+Style/Documentation:
+  Enabled: false
+Style/DotPosition:
+  EnforcedStyle: trailing
+Style/DoubleNegation:
+  Enabled: false
+Style/EachWithObject:
+  Enabled: false
+Style/EmptyLinesAroundAccessModifier:
+  Enabled: false
+Style/EmptyLineBetweenDefs:
+  Enabled: false
+Style/ExtraSpacing:
+  Enabled: false
+Style/Lambda:
+  Enabled: false
+Style/MethodDefParentheses:
+  EnforcedStyle: require_no_parentheses
+Style/MultilineMethodCallIndentation:
+  Enabled: false
+Style/OneLineConditional:
+  Enabled: false
+Style/OpMethod:
+  Enabled: false
+Style/RaiseArgs:
+  EnforcedStyle: compact
+Style/SingleLineMethods:
+  Enabled: false
+Style/SpaceAroundBlockParameters:
+  Enabled: false
+Style/SpaceAroundEqualsInParameterDefault:
+  Enabled: false
+Style/SpaceBeforeComma:
+  Enabled: false
+Style/SpaceBeforeBlockBraces:
+  Enabled: false
+Style/SpaceBeforeSemicolon:
+  Enabled: false
+Style/SpaceInsideBlockBraces:
+  Enabled: false
+Style/SpaceInsideParens:
+  Enabled: false
+Style/StructInheritance:
+  Enabled: false
+Style/ParallelAssignment:
+  Enabled: false
+Style/PercentLiteralDelimiters:
+  PreferredDelimiters:
+    '%w': '[]'
