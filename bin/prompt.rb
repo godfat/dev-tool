@@ -43,7 +43,7 @@ module Prompt
   end
 
   def cwd
-    Dir.pwd.sub(%r{^#{Regexp.escape(ENV['HOME'])}(?:/|$)}, '~').
+    Dir.pwd.sub(%r{^#{Regexp.escape(ENV['HOME'])}(?=/|$)}, '~').
             gsub(/(\w).*?\//, '\1/')
   end
 
