@@ -40,9 +40,7 @@ function fish_prompt
     set remote (set_color 050)
   end
 
-  # set -l pwd (prompt_pwd)
-  set -l pwd (echo $PWD | \
-    sed -e "\|^$HOME"'[^/]'"|! s|^$HOME|~|" -e 's-\([^/.]\)[^/]*/-\1/-g')
+  set -l pwd (prompt_pwd)
   set -l cwd (set_color $fish_color_cwd)$pwd
   set -l git_status
   set -l git_branch (_git_branch_name)
