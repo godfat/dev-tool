@@ -28,6 +28,7 @@
   whatnext = !git describe --tags --abbrev=0 | xargs -I! git diff ! -- $*
   rollback = reset --hard
   damnation = !git reset --hard && git clean -fd
+  changed = !git status --porcelain | cut -d' ' -f3
   staged = diff --staged
   colwrd = diff --color-words
   contri = shortlog -sne --no-merges
