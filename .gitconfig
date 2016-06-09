@@ -10,8 +10,6 @@
   renames = copy
   algorithm = patience
   wordregex = \\w+|\\S
-[push]
-  default = tracking
 [merge]
   log = true
 [rebase]
