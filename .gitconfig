@@ -14,13 +14,14 @@
   log = true
 [rebase]
   stat = true
+[push]
+  default = current
 
 # https://git.wiki.kernel.org/index.php/Aliases
 [alias]
   st = status
   co = checkout
 
-  logt = log --topo-order
   logg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
 
   whatnext = !git describe --tags --abbrev=0 | xargs -I! git diff ! -- $*
