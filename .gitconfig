@@ -15,7 +15,7 @@
 [rebase]
   stat = true
 [push]
-  default = current
+  default = upstream
 
 # https://git.wiki.kernel.org/index.php/Aliases
 [alias]
