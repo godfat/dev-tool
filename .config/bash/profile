@@ -32,12 +32,15 @@ export GEM_GREP=ag
 export DISPLAY=:0
 export FZF_DEFAULT_OPTS='-x'
 
-echo -ne "\033]6;1;fg;red;brightness;0\a"
-echo -ne "\033]6;1;fg;green;brightness;0\a"
-echo -ne "\033]6;1;fg;blue;brightness;0\a"
-echo -ne "\033]6;1;bg;red;brightness;255\a"
-echo -ne "\033]6;1;bg;green;brightness;255\a"
-echo -ne "\033]6;1;bg;blue;brightness;255\a"
+# set tab title color for iterm2
+if test $TERM_PROGRAM = iTerm.app; then
+  echo -ne "\033]6;1;fg;red;brightness;0\a"
+  echo -ne "\033]6;1;fg;green;brightness;0\a"
+  echo -ne "\033]6;1;fg;blue;brightness;0\a"
+  echo -ne "\033]6;1;bg;red;brightness;255\a"
+  echo -ne "\033]6;1;bg;green;brightness;255\a"
+  echo -ne "\033]6;1;bg;blue;brightness;255\a"
+fi
 
 # start fishing...
 if test $(which fish 2>/dev/null); then
