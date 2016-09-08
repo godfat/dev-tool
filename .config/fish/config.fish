@@ -28,6 +28,10 @@ function _remote_hostname
   end
 end
 
+function fish_title
+  echo $_ (_remote_hostname)
+end
+
 function fish_prompt
   set -l cyan (set_color cyan)
   set -l normal (set_color normal)
