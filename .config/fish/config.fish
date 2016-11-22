@@ -5,14 +5,13 @@ function ff
 end
 
 function _git_branch_name
-  echo (command git branch ^/dev/null | grep -m1 '^\*' | cut -b 3-)
+  echo (git branch ^/dev/null | grep -m1 '^\*' | cut -b 3-)
 end
 
 function _git_status_symbol
   set -l git_status (git status --porcelain ^/dev/null)
   if test -n "$git_status"
-    # Is there anyway to preserve newlines so we can reuse $git_status?
-    if git status --porcelain ^/dev/null | grep '^.[^ ]' >/dev/null
+    if echo "$git_status" | grep '^.[^ ]' >/dev/null
       echo '*' # dirty
     else
       echo '#' # all staged
@@ -46,22 +45,22 @@ function fish_prompt
 
   set -l pwd (prompt_pwd)
   set -l cwd (set_color $fish_color_cwd)$pwd
-  set -l git_status
   set -l git_branch (_git_branch_name)
   set -l git_hide_branch (git config --get prompt.hide ^/dev/null)
+  set -l git_prompt
 
   if test -n "$git_branch"
     if test -n "$git_hide_branch"
-      set git_status (_git_status_symbol)
+      set git_prompt (_git_status_symbol)
     else
-      set git_status ' '(_git_status_symbol)(_git_branch_name)
+      set git_prompt ' '(_git_status_symbol)(_git_branch_name)
     end
   else
-    set git_status ''
+    set git_prompt ''
   end
 
   echo -n $time(date '+%H:%M') $remote(_remote_hostname) \
-          $cwd$cyan$git_status$normal'> '
+          $cwd$cyan$git_prompt$normal'> '
 end
 
 set -x CDPATH .
