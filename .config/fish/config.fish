@@ -21,6 +21,27 @@ function _git_status_symbol
   end
 end
 
+function _git_branch_symbol
+  set -l branch_status (git status -sb ^/dev/null | head -1)
+  set -l diverged (echo $branch_status | grep -o ',')
+
+  if test -n "$diverged"
+    echo '!'
+  else
+    set -l branch (echo $branch_status | egrep -o '\[[a-z]+' | sed 's/\[//')
+    set -l number (echo $branch_status | egrep -o '[0-9]+\]$' | sed 's/\]//')
+
+    switch "$branch"
+    case 'behind'
+      echo '<'$number
+    case 'ahead'
+      echo '>'$number
+    case '*'
+      echo ''
+    end
+  end
+end
+
 function _remote_hostname
   if test -n "$SSH_CONNECTION"
     echo (whoami)@(hostname)
@@ -51,9 +72,9 @@ function fish_prompt
 
   if test -n "$git_branch"
     if test -n "$git_hide_branch"
-      set git_prompt (_git_status_symbol)
+      set git_prompt (_git_status_symbol)(_git_branch_symbol)
     else
-      set git_prompt ' '(_git_status_symbol)(_git_branch_name)
+      set git_prompt ' '(_git_status_symbol)$git_branch(_git_branch_symbol)
     end
   else
     set git_prompt ''
