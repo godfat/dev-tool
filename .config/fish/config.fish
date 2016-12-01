@@ -11,7 +11,8 @@ end
 function _git_status_symbol
   set -l git_status (git status --porcelain ^/dev/null)
   if test -n "$git_status"
-    if echo "$git_status" | grep '^.[^ ]' >/dev/null
+    # Is there anyway to preserve newlines so we can reuse $git_status?
+    if git status --porcelain ^/dev/null | grep '^.[^ ]' >/dev/null
       echo '*' # dirty
     else
       echo '#' # all staged
