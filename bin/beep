@@ -1,4 +1,6 @@
 #!/bin/sh
 
-time $*
+if test $*; then
+  time $*
+fi
 printf '\a'
