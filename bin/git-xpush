@@ -1,0 +1,10 @@
+#!/bin/sh
+
+args=($*)
+branch=${args[@]:(-1)}
+remote=${args[@]:0:${#args[@]}-1}
+
+# For example, `git xpush remote0 remote1 master` equals to:
+# `xrun git push remote0 master, git push remote1 master` equals to:
+# `git push remote0 master; and git push remote1 master` in parallels
+xrun `echo ${remote[@]} | sed -E "s/([^ ]+)/git push \1 $branch,/g"`
