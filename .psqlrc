@@ -1,3 +1,4 @@
 \x auto
+\pset pager off
 \pset null '␀'
 \timing on

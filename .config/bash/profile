@@ -12,6 +12,11 @@ if test -d ~/.cabal/bin; then
   export PATH=~/.cabal/bin:$PATH
 fi
 
+# rust?
+if test -d ~/.cargo/bin; then
+  export PATH=~/.cargo/bin:$PATH
+fi
+
 # ruby?
 rubies=`ls -d ~/.gem/*/* 2>/dev/null | egrep '([0-9]\.)+[0-9]$'`
 for path in $rubies ~
@@ -28,7 +33,7 @@ export LANG=en_US.UTF-8
 # other settings
 export EDITOR=vim
 export GEM_EDITOR=eit
-export GEM_GREP=ag
+export GEM_GREP=rg
 export DISPLAY=:0
 export FZF_DEFAULT_OPTS='-x'
 
