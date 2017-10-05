@@ -1,9 +1,4 @@
 
-function ff
-  fzf | read -l fzf_last_select
-  env $argv $fzf_last_select
-end
-
 function _git_branch_name
   echo (git branch ^/dev/null | grep -m1 '^\*' | cut -b 3-)
 end
