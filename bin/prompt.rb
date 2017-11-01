@@ -122,8 +122,7 @@ module Prompt
   end
 
   def branch
-    return '' if (branch = `git branch 2> /dev/null`).empty?
-    branch.match(/\* (.+)/)[1]
+    `git rev-parse --abbrev-ref HEAD 2> /dev/null`.chomp
   end
 end
 

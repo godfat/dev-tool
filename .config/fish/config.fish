@@ -1,6 +1,6 @@
 
 function _git_branch_name
-  echo (git branch ^/dev/null | grep -m1 '^\*' | cut -b 3-)
+  echo (git rev-parse --abbrev-ref HEAD ^/dev/null)
 end
 
 function _git_status_symbol
