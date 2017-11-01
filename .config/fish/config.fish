@@ -24,8 +24,8 @@ function _git_branch_symbol
   if test -n "$diverged"
     echo '!'
   else
-    set -l branch (echo $branch_status | egrep -o '\[[a-z]+' | sed 's/\[//')
-    set -l number (echo $branch_status | egrep -o '[0-9]+\]$' | sed 's/\]//')
+    set -l branch (echo $branch_status | grep -E -o '\[[a-z]+' | sed 's/\[//')
+    set -l number (echo $branch_status | grep -E -o '[0-9]+\]$' | sed 's/\]//')
 
     switch "$branch"
     case 'behind'
