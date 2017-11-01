@@ -1,3 +1,0 @@
-#!/bin/sh
-
-git branch-remote-merged $1 | xargs -n1 -I! git tag-soft archive/! $1/!

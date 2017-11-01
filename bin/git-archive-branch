@@ -1,4 +1,0 @@
-#!/bin/sh
-
-echo Archiving $1
-git tag-soft archive/$1 $1 && git branch -q -d $1
