@@ -8,4 +8,4 @@ remotes=$(echo "$@" | sed -E "s/ $branch$//")
 # For example, `git xpush remote0 remote1 master` equals to:
 # `xrun git push remote0 master, git push remote1 master` equals to:
 # `git push remote0 master; and git push remote1 master` in parallels
-xrun `echo $remotes | sed -E "s/([^ ]+)/git push \1 $branch,/g"`
+xrun $(echo "$remotes" | sed -E "s/([^ ]+)/git push \1 $branch,/g")
