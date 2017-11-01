@@ -1,0 +1,8 @@
+#!/bin/sh
+
+branch=${1-"$(git rev-parse --abbrev-ref HEAD)"}
+remote=$(git config branch."$branch".remote)
+remote_branch=$(git config branch."$branch".merge | cut -d/ -f3)
+
+git rebase --interactive --autosquash \
+  "$(git merge-base "$remote/$remote_branch" "$branch")"
