@@ -18,7 +18,7 @@ if test -d ~/.cargo/bin; then
 fi
 
 # ruby?
-rubies=`ls -d ~/.gem/*/* 2> /dev/null | egrep '([0-9]\.)+[0-9]$'`
+rubies=$(ls -d ~/.gem/*/* 2> /dev/null | egrep '([0-9]\.)+[0-9]$')
 for path in $rubies ~
 do
   if test -d $path; then
@@ -39,28 +39,28 @@ export FZF_DEFAULT_OPTS='-x'
 
 # start fishing...
 if test $(which fish 2> /dev/null); then
-  stty=`stty -g`
+  stty=$(stty -g)
   fish # fish would mess up stty for bash
   stty $stty
 fi
 
 # homebrew bash completion
 if test $(which brew 2> /dev/null); then
-  if test -f `brew --prefix`/Library/Contributions/brew_bash_completion.sh; then
-    source `brew --prefix`/Library/Contributions/brew_bash_completion.sh
+  if test -f $(brew --prefix)/Library/Contributions/brew_bash_completion.sh; then
+    source $(brew --prefix)/Library/Contributions/brew_bash_completion.sh
   fi
 
-  if test -f `brew --prefix`/etc/bash_completion; then
-    source `brew --prefix`/etc/bash_completion
+  if test -f $(brew --prefix)/etc/bash_completion; then
+    source $(brew --prefix)/etc/bash_completion
   fi
 fi
 
 _git_branch_name(){
-  echo `command git rev-parse --abbrev-ref HEAD 2> /dev/null`
+  echo $(command git rev-parse --abbrev-ref HEAD 2> /dev/null)
 }
 
 _git_status_symbol(){
-  git_status=`git status --porcelain 2> /dev/null`
+  git_status=$(git status --porcelain 2> /dev/null)
   if test -n "$git_status"; then
     # Is there anyway to preserve newlines so we can reuse $git_status?
     if git status --porcelain 2> /dev/null | grep '^.[^ ]' >/dev/null; then
@@ -75,42 +75,42 @@ _git_status_symbol(){
 
 _remote_hostname(){
   if test -n "$SSH_CONNECTION"; then
-    echo `whoami`@`hostname`' '
+    echo $(whoami)@$(hostname)' '
   fi
 }
 
 bash_prompt(){
-  cyan=`printf '\[\e[36m\]'`
-  normal=`printf '\[\e[0m\]'`
+  cyan=$(printf '\[\e[36m\]')
+  normal=$(printf '\[\e[0m\]')
 
-  time=`printf '\[\e[0m\]'`
-  remote=`printf '\[\e[0m\]'`
+  time=$(printf '\[\e[0m\]')
+  remote=$(printf '\[\e[0m\]')
 
   if echo $TERM | grep 256 >/dev/null; then
-    time=`printf '\[\e[38;5;102m\]'`
-    remote=`printf '\[\e[38;5;22m\]'`
+    time=$(printf '\[\e[38;5;102m\]')
+    remote=$(printf '\[\e[38;5;22m\]')
   fi
 
   # stolen from https://github.com/fish-shell/fish-shell/blob/master/share/functions/prompt_pwd.fish
   cwd=`printf '\[\e[32m\]'``echo $PWD | sed -e "\|^$HOME[^/]|! s|^$HOME|~|" -e 's-\([^/.]\)[^/]*/-\1/-g'`
   git_status=
-  git_branch=`_git_branch_name`
-  git_hide_branch=`git config --get prompt.hide 2>/dev/null`
+  git_branch=$(_git_branch_name)
+  git_hide_branch=$(git config --get prompt.hide 2>/dev/null)
 
   if test -n "$git_branch"; then
     if test -n "$git_hide_branch"; then
       git_status=`_git_status_symbol`
     else
-      git_status=' '`_git_status_symbol``_git_branch_name`
+      git_status=' '$(_git_status_symbol)$(_git_branch_name)
     fi
   else
     git_status=''
   fi
 
-  time=$time`date '+%H:%M'`
-  remote=$remote`_remote_hostname`
+  time=$time$(date '+%H:%M')
+  remote=$remote$(_remote_hostname)
 
-  PS1=`echo $time $remote$cwd$cyan$git_status$normal'$ '`
+  PS1=$(echo $time $remote$cwd$cyan$git_status$normal'$ ')
 }
 export PROMPT_COMMAND=bash_prompt
 
