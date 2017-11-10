@@ -1,5 +1,16 @@
 #!/usr/bin/env ruby
 
+# Copied from https://github.com/godfat/gem-grep
+def quote arg
+  escaped = arg.gsub('\\', '\\\\\\').gsub("'", '\'').gsub('"', '\\"')
+
+  if escaped.include?(' ')
+    "'#{escaped}'"
+  else
+    escaped
+  end
+end
+
 opts  = lambda{ |opt | opt.start_with?('-') }
 exist = lambda{ |path| File.exist?(path)    }
 args  =  ARGV.select(&opts)
@@ -37,11 +48,11 @@ end
 
 cmds = prog + args + files
 
-puts("\e[33m#{cmds.join(' ')}\e[m")
+puts("\e[33m#{cmds.map(&method(:quote)).join(' ')}\e[m")
 system(*cmds)
 
 if nons.any?
-  puts "\e[35m#{nons.map{|p|"'#{p}'"}.join(', ')} were not existed.\e[m"
+  puts "\e[35m#{nons.map(&method(:quote)).join(', ')} did not exist.\e[m"
 end
 
 exit unless $DEBUG
