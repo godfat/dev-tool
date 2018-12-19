@@ -1,1 +1,1 @@
-gem: --user-install --env-shebang --no-rdoc --no-ri --no-check-development
+gem: --user-install --env-shebang --no-document --no-check-development
