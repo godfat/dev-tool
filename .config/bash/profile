@@ -37,6 +37,8 @@ export GEM_EDITOR=eit
 export GEM_GREP=rg
 export DISPLAY=:0
 export FZF_DEFAULT_OPTS='-x'
+GPG_TTY=$(tty)
+export GPG_TTY
 
 # start fishing...
 if test "$(which fish 2> /dev/null)"; then
