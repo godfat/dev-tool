@@ -1,0 +1,5 @@
+#!/bin/sh
+
+git stash
+git stash show -p -b -U0 | git apply --unidiff-zero
+git drop
