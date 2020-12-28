@@ -1,7 +1,9 @@
 #!/bin/bash
 
-# common PATH
-export PATH=/usr/local/bin:/usr/local/sbin:$PATH
+# macports?
+if test -d /opt/local/bin; then
+  export PATH=/opt/local/bin:$PATH
+fi
 
 # node?
 if test -d /usr/local/share/npm/bin; then
