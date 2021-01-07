@@ -116,7 +116,7 @@ if   test "$(uname)" = 'Linux'; then
   alias la='ll -a'
 # mac bash specific
 elif test "$(uname)" = 'Darwin'; then
-  alias ls='ls -Gw'
-  alias ll='ls -lhw'
+  alias ls='ls -G'
+  alias ll='ls -lh'
   alias la='ll -a'
 fi
