@@ -4,10 +4,13 @@ function _git_branch_name
 end
 
 function _git_status_symbol
-  set -l git_status (git status --porcelain ^/dev/null)
+  begin
+    set -l IFS # preserve newlines, locally to this scope
+    set git_status (git status --porcelain ^/dev/null) # function scope
+  end
+
   if test -n "$git_status"
-    # Is there anyway to preserve newlines so we can reuse $git_status?
-    if git status --porcelain ^/dev/null | grep '^.[^ ]' >/dev/null
+    if echo "$git_status" | grep '^.[^ ]' >/dev/null
       echo '*' # dirty
     else
       echo '#' # all staged
