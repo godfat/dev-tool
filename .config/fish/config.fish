@@ -6,7 +6,7 @@ end
 function _git_status_symbol
   begin
     set -l IFS # preserve newlines, locally to this scope
-    set git_status (git status --porcelain ^/dev/null) # function scope
+    set git_status (echo $argv | tail -n +2) # function scope
   end
 
   if test -n "$git_status"
@@ -21,7 +21,7 @@ function _git_status_symbol
 end
 
 function _git_branch_symbol
-  set -l branch_status (git status -sb ^/dev/null | head -1)
+  set -l branch_status (echo $argv | head -1)
   set -l diverged (echo $branch_status | grep -o ',')
 
   if test -n "$diverged"
@@ -67,13 +67,22 @@ function fish_prompt
   set -l cwd (set_color $fish_color_cwd)$pwd
   set -l git_branch (_git_branch_name)
   set -l git_hide_branch (git config --get prompt.hide ^/dev/null)
+  set -l git_status
   set -l git_prompt
 
   if test -n "$git_branch"
+    begin
+      set -l IFS # preserve newlines, locally to this scope
+      set git_status (git status --porcelain --short --branch ^/dev/null)
+    end
+
+    set -l git_status_symbol (_git_status_symbol $git_status)
+    set -l git_branch_symbol (_git_branch_symbol $git_status)
+
     if test -n "$git_hide_branch"
-      set git_prompt (_git_status_symbol)(_git_branch_symbol)
+      set git_prompt $git_status_symbol$git_branch_symbol
     else
-      set git_prompt ' '(_git_status_symbol)$git_branch(_git_branch_symbol)
+      set git_prompt ' '$git_status_symbol$git_branch$git_branch_symbol
     end
   else
     set git_prompt ''
