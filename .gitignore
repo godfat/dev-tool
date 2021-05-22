@@ -9,3 +9,4 @@ bin/ignore-*
 .config/irb/irb_history
 .config/gtk-2.0
 .config/inkscape
+.config/iterm2/
