@@ -1,6 +1,6 @@
 
 function _git_branch_name
-  echo (git rev-parse --abbrev-ref HEAD ^/dev/null)
+  echo (git rev-parse --abbrev-ref HEAD 2> /dev/null)
 end
 
 function _git_status_symbol
@@ -10,7 +10,7 @@ function _git_status_symbol
   end
 
   if test -n "$git_status"
-    if echo "$git_status" | grep '^.[^ ]' >/dev/null
+    if echo "$git_status" | grep '^.[^ ]' > /dev/null
       echo '*' # dirty
     else
       echo '#' # all staged
@@ -58,7 +58,7 @@ function fish_prompt
   set -l time (set_color normal)
   set -l remote (set_color normal)
 
-  if echo $TERM | grep 256 >/dev/null
+  if echo $TERM | grep 256 > /dev/null
     set time (set_color 888)
     set remote (set_color 050)
   end
@@ -66,14 +66,14 @@ function fish_prompt
   set -l pwd (prompt_pwd)
   set -l cwd (set_color $fish_color_cwd)$pwd
   set -l git_branch (_git_branch_name)
-  set -l git_hide_branch (git config --get prompt.hide ^/dev/null)
+  set -l git_hide_branch (git config --get prompt.hide 2> /dev/null)
   set -l git_status
   set -l git_prompt
 
   if test -n "$git_branch"
     begin
       set -l IFS # preserve newlines, locally to this scope
-      set git_status (git status --porcelain --short --branch ^/dev/null)
+      set git_status (git status --porcelain --short --branch 2> /dev/null)
     end
 
     set -l git_status_symbol (_git_status_symbol $git_status)

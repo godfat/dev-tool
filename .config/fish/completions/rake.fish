@@ -4,7 +4,7 @@
 
 # fish completion for rake
 function __fish_rake_tasks
-  rake -T ^/dev/null | awk '{print $2"\t"substr($0, index($0, $4))}'
+  rake -T 2> /dev/null | awk '{print $2"\t"substr($0, index($0, $4))}'
 end
 
 ### commands
