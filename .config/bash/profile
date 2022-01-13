@@ -6,22 +6,22 @@ if test -d /opt/local/bin; then
 fi
 
 if test -d /opt/local/libexec/gnubin; then
-  export PATH=/opt/local/libexec/gnubin:$PATH
+  export USER_PATH=/opt/local/libexec/gnubin:$USER_PATH
 fi
 
 # node?
 if test -d /usr/local/share/npm/bin; then
-  export PATH=/usr/local/share/npm/bin:$PATH
+  export USER_PATH=/usr/local/share/npm/bin:$USER_PATH
 fi
 
 # cabal?
 if test -d ~/.cabal/bin; then
-  export PATH=~/.cabal/bin:$PATH
+  export USER_PATH=~/.cabal/bin:$USER_PATH
 fi
 
 # rust?
 if test -d ~/.cargo/bin; then
-  export PATH=~/.cargo/bin:$PATH
+  export USER_PATH=~/.cargo/bin:$USER_PATH
 fi
 
 # ruby?
@@ -29,7 +29,7 @@ rubies=$(ls -d ~/.gem/*/* 2> /dev/null | grep -E '([0-9]\.)+[0-9]$')
 for path in $rubies ~
 do
   if test -d "$path"; then
-    export PATH=$path/bin:$PATH
+    export USER_PATH=$path/bin:$USER_PATH
   fi
 done
 
@@ -46,11 +46,21 @@ export FZF_DEFAULT_OPTS='-x'
 GPG_TTY=$(tty)
 export GPG_TTY
 
+# cut the last :
+if test -n "$USER_PATH"; then
+  export USER_PATH=$(echo -n $USER_PATH | sed 's/.$//')
+fi
+
 # start fishing...
 if test "$(command -v fish 2> /dev/null)"; then
   stty=$(stty -g)
   fish # fish would mess up stty for bash
   stty "$stty"
+fi
+
+# prepend user paths
+if test -n "$USER_PATH"; then
+  export PATH=$USER_PATH:$PATH
 fi
 
 _git_branch_name(){

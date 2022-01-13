@@ -93,3 +93,4 @@ function fish_prompt
 end
 
 set -x CDPATH .
+set -x PATH $USER_PATH $PATH
