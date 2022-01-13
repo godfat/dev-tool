@@ -5,6 +5,10 @@ if test -d /opt/local/bin; then
   export PATH=/opt/local/bin:/opt/local/sbin:$PATH
 fi
 
+if test -d /opt/local/libexec/gnubin; then
+  export PATH=/opt/local/libexec/gnubin:$PATH
+fi
+
 # node?
 if test -d /usr/local/share/npm/bin; then
   export PATH=/usr/local/share/npm/bin:$PATH
