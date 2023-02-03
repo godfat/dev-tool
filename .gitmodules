@@ -1,15 +1,15 @@
 [submodule ".vim/bundle/vim-pathogen"]
 	path = .vim/bundle/vim-pathogen
-	url = git://github.com/tpope/vim-pathogen.git
+	url = https://github.com/tpope/vim-pathogen.git
 [submodule ".vim/bundle/unite.vim"]
 	path = .vim/bundle/unite.vim
-	url = git://github.com/Shougo/unite.vim.git
+	url = https://github.com/Shougo/unite.vim.git
 [submodule ".vim/bundle/vimfiler.vim"]
 	path = .vim/bundle/vimfiler.vim
-	url = git://github.com/Shougo/vimfiler.vim.git
+	url = https://github.com/Shougo/vimfiler.vim.git
 [submodule ".vim/bundle/vimproc.vim"]
 	path = .vim/bundle/vimproc.vim
-	url = git://github.com/Shougo/vimproc.vim.git
+	url = https://github.com/Shougo/vimproc.vim.git
 [submodule ".vim/bundle/ag.vim"]
 	path = .vim/bundle/ag.vim
-	url = git://github.com/rking/ag.vim.git
+	url = https://github.com/rking/ag.vim.git
