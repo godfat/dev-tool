@@ -8,7 +8,7 @@
   decorate = auto
 [diff]
   renames = copy
-  algorithm = patience
+  algorithm = histogram
 [merge]
   log = true
 [rebase]
