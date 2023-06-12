@@ -51,14 +51,14 @@ if test -n "$USER_PATH"; then
   export USER_PATH=$(echo -n $USER_PATH | sed 's/.$//')
 fi
 
-# prepend user paths
-if test -n "$USER_PATH"; then
-  export PATH=$USER_PATH:$PATH
-fi
-
 # start fishing...
 if test "$(command -v fish 2> /dev/null)"; then
   fish
+fi
+
+# prepend user paths
+if test -n "$USER_PATH"; then
+  export PATH=$USER_PATH:$PATH
 fi
 
 _git_branch_name(){
