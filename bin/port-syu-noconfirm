@@ -1,5 +1,3 @@
 #!/bin/sh
 
-port -N selfupdate
-port -N upgrade outdated
-port -N reclaim
+port -N selfupdate && port -N upgrade outdated && port -N reclaim
